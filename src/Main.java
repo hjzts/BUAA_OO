@@ -1,5 +1,7 @@
-// 按两次 Shift 打开“随处搜索”对话框并输入 `show whitespaces`，
-// 然后按 Enter 键。现在，您可以在代码中看到空格字符。
+/**
+ *
+ * @author 86152
+ */
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,20 +9,20 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
-    private int adventuerId;
-    private String adventuerName;
-    private int bottleCount;
-    private int equipmentCount;
+//    private int adventuerId;
+//    private String adventuerName;
+//    private int bottleCount;
+//    private int equipmentCount;
+//
+//    private int bottleId;
+//    private String bottleName;
+//    private int bottleCapacity;
+//
+//    private int equipmentId;
+//    private String equipmentName;
+//    private int equipmentStar;
 
-    private int bottleId;
-    private String bottleName;
-    private int bottleCapacity;
-
-    private int equipmentId;
-    private String equipmentName;
-    private int equipmentStar;
-
-    public void main(String[] args) {
+    public static void main(String[] args) {
         ArrayList<ArrayList<String>> inputInfo = new ArrayList<>(); // 解析后的输入将会存进该容器中, 类似于c语言的二维数组
         Scanner scanner = new Scanner(System.in);
         int n = Integer.parseInt(scanner.nextLine().trim()); // 读取行数
@@ -64,60 +66,60 @@ public class Main {
         }
     }
 
-    public void adventuerAdd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
-        adventuerId = Integer.parseInt(strings.get(1));
-        adventuerName = strings.get(2);
+    public static void adventuerAdd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
+        int adventuerId = Integer.parseInt(strings.get(1));
+        String adventuerName = strings.get(2);
         Adventuer adventuer1 = new Adventuer(adventuerId, adventuerName);
         adventuersMap.put(adventuerId, adventuer1);
     }
 
-    public void bottleAdd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
-        adventuerId = Integer.parseInt(strings.get(1));
-        bottleId = Integer.parseInt(strings.get(2));
-        bottleName = strings.get(3);
-        bottleCapacity = Integer.parseInt(strings.get(4));
+    public static void bottleAdd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
+        int adventuerId = Integer.parseInt(strings.get(1));
+        int bottleId = Integer.parseInt(strings.get(2));
+        String bottleName = strings.get(3);
+        int bottleCapacity = Integer.parseInt(strings.get(4));
 
         Bottle bottle = new Bottle(bottleId, bottleName, bottleCapacity);
         adventuersMap.get(adventuerId).addBottle(bottle);
     }
 
-    public void bottleDelete(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
-        adventuerId = Integer.parseInt(strings.get(1));
-        bottleId = Integer.parseInt(strings.get(2));
+    public static void bottleDelete(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
+        int adventuerId = Integer.parseInt(strings.get(1));
+        int bottleId = Integer.parseInt(strings.get(2));
 
-        bottleName = adventuersMap.get(adventuerId).getBottleName(bottleId);
+        String bottleName = adventuersMap.get(adventuerId).getBottleName(bottleId);
         adventuersMap.get(adventuerId).deleteBottle(bottleId);
-        bottleCount = adventuersMap.get(adventuerId).getBottleCount();
+        int bottleCount = adventuersMap.get(adventuerId).getBottleCount();
 
         System.out.println(bottleCount + " " + bottleName);
     }
 
-    public void equipmentAdd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
-        adventuerId = Integer.parseInt(strings.get(1));
-        equipmentId = Integer.parseInt(strings.get(2));
-        equipmentName = strings.get(3);
-        equipmentStar = Integer.parseInt(strings.get(4));
+    public static void equipmentAdd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
+        int adventuerId = Integer.parseInt(strings.get(1));
+        int equipmentId = Integer.parseInt(strings.get(2));
+        String equipmentName = strings.get(3);
+        int equipmentStar = Integer.parseInt(strings.get(4));
 
         Equipment equipment = new Equipment(equipmentId, equipmentName, equipmentStar);
         adventuersMap.get(adventuerId).addEquipment(equipment);
     }
 
-    public void equipmentDel(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
-        adventuerId = Integer.parseInt(strings.get(1));
-        equipmentId = Integer.parseInt(strings.get(2));
-        equipmentName = adventuersMap.get(adventuerId).getEquipmentName(equipmentId);
+    public static void equipmentDel(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
+        int adventuerId = Integer.parseInt(strings.get(1));
+        int equipmentId = Integer.parseInt(strings.get(2));
+        String equipmentName = adventuersMap.get(adventuerId).getEquipmentName(equipmentId);
         adventuersMap.get(adventuerId).deleteEquipment(equipmentId);
-        equipmentCount = adventuersMap.get(adventuerId).getEquipmentCount();
+        int equipmentCount = adventuersMap.get(adventuerId).getEquipmentCount();
         System.out.println(equipmentCount + " " + equipmentName);
     }
 
-    public void equipmentUp(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
-        adventuerId = Integer.parseInt(strings.get(1));
-        equipmentId = Integer.parseInt(strings.get(2));
+    public static void equipmentUp(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
+        int adventuerId = Integer.parseInt(strings.get(1));
+        int equipmentId = Integer.parseInt(strings.get(2));
 
-        equipmentName = adventuersMap.get(adventuerId).getEquipmentName(equipmentId);
+        String equipmentName = adventuersMap.get(adventuerId).getEquipmentName(equipmentId);
         adventuersMap.get(adventuerId).upgradeEquipment(equipmentId);
-        equipmentStar = adventuersMap.get(adventuerId).getEquipmentStar(equipmentId);
+        int equipmentStar = adventuersMap.get(adventuerId).getEquipmentStar(equipmentId);
         System.out.println(equipmentName + " " + equipmentStar);
     }
 }

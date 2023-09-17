@@ -1,6 +1,6 @@
 /**
  * 实现了Bottle类中bottle的基本属性以及加入了BottleHashMap这一类
- *
+ * 2022/9/16 22:37
  * @author 86152
  */
 public class Bottle {

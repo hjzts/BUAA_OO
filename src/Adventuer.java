@@ -1,10 +1,10 @@
-import java.util.HashMap;
-
 /**
  * 冒险者类
  *
  * @author 86152
  */
+import java.util.HashMap;
+
 public class Adventuer {
     private int id;
     private String name;
