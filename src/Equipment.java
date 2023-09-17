@@ -7,21 +7,26 @@ public class Equipment {
     private int id;
     private String name;
     private int star;
-    public Equipment(int id,String name,int star){
-        this.id= id;
+
+    public Equipment(int id, String name, int star) {
+        this.id = id;
         this.name = name;
         this.star = star;
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public int getId(){
+
+    public int getId() {
         return id;
     }
-    public int getStar(){
+
+    public int getStar() {
         return star;
     }
-    public void upgrade(){
+
+    public void upgrade() {
         star += 1;
     }
 }

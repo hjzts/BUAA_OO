@@ -8,15 +8,17 @@ public class Bottle {
     private String name;
     private int capacity;
 
-    public Bottle(int id,String name,int capacity){
+    public Bottle(int id,String name,int capacity) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public int getId(){
+
+    public int getId() {
         return id;
     }
 
