@@ -9,18 +9,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
-//    private int adventuerId;
-//    private String adventuerName;
-//    private int bottleCount;
-//    private int equipmentCount;
-//
-//    private int bottleId;
-//    private String bottleName;
-//    private int bottleCapacity;
-//
-//    private int equipmentId;
-//    private String equipmentName;
-//    private int equipmentStar;
 
     public static void main(String[] args) {
         ArrayList<ArrayList<String>> inputInfo = new ArrayList<>(); // 解析后的输入将会存进该容器中, 类似于c语言的二维数组
@@ -38,27 +26,27 @@ public class Main {
             switch (strings.get(0)) { // 获取第i行指令的第一个部分
                 case "1":
                     // Adventuer.add();
-                    adventuerAdd(adventuersMap, strings);
+                    advAd(adventuersMap, strings);
                     break;
                 case "2":
                     // Bottle.add();
-                    bottleAdd(adventuersMap, strings);
+                    botAd(adventuersMap, strings);
                     break;
                 case "3":
                     // Bottle.delete();
-                    bottleDelete(adventuersMap, strings);
+                    botDe(adventuersMap, strings);
                     break;
                 case "4":
                     //Equipment.add();
-                    equipmentAdd(adventuersMap, strings);
+                    equAd(adventuersMap, strings);
                     break;
                 case "5":
                     //Equipment.delete();
-                    equipmentDel(adventuersMap, strings);
+                    equDe(adventuersMap, strings);
                     break;
                 case "6":
                     //Equipment.upgrade();
-                    equipmentUp(adventuersMap, strings);
+                    equUp(adventuersMap, strings);
                     break;
                 default:
                     break;
@@ -66,14 +54,14 @@ public class Main {
         }
     }
 
-    public static void adventuerAdd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
+    public static void advAd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
         int adventuerId = Integer.parseInt(strings.get(1));
         String adventuerName = strings.get(2);
         Adventuer adventuer1 = new Adventuer(adventuerId, adventuerName);
         adventuersMap.put(adventuerId, adventuer1);
     }
 
-    public static void bottleAdd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
+    public static void botAd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
         int adventuerId = Integer.parseInt(strings.get(1));
         int bottleId = Integer.parseInt(strings.get(2));
         String bottleName = strings.get(3);
@@ -83,7 +71,7 @@ public class Main {
         adventuersMap.get(adventuerId).addBottle(bottle);
     }
 
-    public static void bottleDelete(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
+    public static void botDe(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
         int adventuerId = Integer.parseInt(strings.get(1));
         int bottleId = Integer.parseInt(strings.get(2));
 
@@ -94,7 +82,7 @@ public class Main {
         System.out.println(bottleCount + " " + bottleName);
     }
 
-    public static void equipmentAdd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
+    public static void equAd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
         int adventuerId = Integer.parseInt(strings.get(1));
         int equipmentId = Integer.parseInt(strings.get(2));
         String equipmentName = strings.get(3);
@@ -104,7 +92,7 @@ public class Main {
         adventuersMap.get(adventuerId).addEquipment(equipment);
     }
 
-    public static void equipmentDel(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
+    public static void equDe(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
         int adventuerId = Integer.parseInt(strings.get(1));
         int equipmentId = Integer.parseInt(strings.get(2));
         String equipmentName = adventuersMap.get(adventuerId).getEquipmentName(equipmentId);
@@ -113,7 +101,7 @@ public class Main {
         System.out.println(equipmentCount + " " + equipmentName);
     }
 
-    public static void equipmentUp(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
+    public static void equUp(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
         int adventuerId = Integer.parseInt(strings.get(1));
         int equipmentId = Integer.parseInt(strings.get(2));
 
