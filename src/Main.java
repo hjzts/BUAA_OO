@@ -1,5 +1,5 @@
 /**
- *
+ * Main方法，冒险者系列第一版
  * @author 86152
  */
 
@@ -19,13 +19,13 @@ public class Main {
             String[] strings = nextLine.trim().split(" +"); // 按空格对行进行分割
             inputInfo.add(new ArrayList<>(Arrays.asList(strings))); // 将指令分割后的各个部分存进容器中
         }
-        HashMap<Integer, Adventuer> adventuersMap = new HashMap<>();
+        HashMap<Integer, Adventurer> adventuersMap = new HashMap<>();
 
         for (int i = 0; i < n; ++i) {
             ArrayList<String> strings = inputInfo.get(i); // 获取第i行指令
             switch (strings.get(0)) { // 获取第i行指令的第一个部分
                 case "1":
-                    // Adventuer.add();
+                    // Adventurer.add();
                     advAd(adventuersMap, strings);
                     break;
                 case "2":
@@ -54,60 +54,60 @@ public class Main {
         }
     }
 
-    public static void advAd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
-        int adventuerId = Integer.parseInt(strings.get(1));
-        String adventuerName = strings.get(2);
-        Adventuer adventuer1 = new Adventuer(adventuerId, adventuerName);
-        adventuersMap.put(adventuerId, adventuer1);
+    public static void advAd(HashMap<Integer, Adventurer> adventuersMap,ArrayList<String> strings) {
+        int adventurerId = Integer.parseInt(strings.get(1));
+        String adventurerName = strings.get(2);
+        Adventurer adventurer1 = new Adventurer(adventurerId, adventurerName);
+        adventuersMap.put(adventurerId, adventurer1);
     }
 
-    public static void botAd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
-        int adventuerId = Integer.parseInt(strings.get(1));
+    public static void botAd(HashMap<Integer, Adventurer> adventuersMap,ArrayList<String> strings) {
+        int adventurerId = Integer.parseInt(strings.get(1));
         int bottleId = Integer.parseInt(strings.get(2));
         String bottleName = strings.get(3);
         int bottleCapacity = Integer.parseInt(strings.get(4));
 
         Bottle bottle = new Bottle(bottleId, bottleName, bottleCapacity);
-        adventuersMap.get(adventuerId).addBottle(bottle);
+        adventuersMap.get(adventurerId).addBottle(bottle);
     }
 
-    public static void botDe(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
-        int adventuerId = Integer.parseInt(strings.get(1));
+    public static void botDe(HashMap<Integer, Adventurer> adventuersMap,ArrayList<String> strings) {
+        int adventurerId = Integer.parseInt(strings.get(1));
         int bottleId = Integer.parseInt(strings.get(2));
 
-        String bottleName = adventuersMap.get(adventuerId).getBottleName(bottleId);
-        adventuersMap.get(adventuerId).deleteBottle(bottleId);
-        int bottleCount = adventuersMap.get(adventuerId).getBottleCount();
+        String bottleName = adventuersMap.get(adventurerId).getBottleName(bottleId);
+        adventuersMap.get(adventurerId).deleteBottle(bottleId);
+        int bottleCount = adventuersMap.get(adventurerId).getBottleCount();
 
         System.out.println(bottleCount + " " + bottleName);
     }
 
-    public static void equAd(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
-        int adventuerId = Integer.parseInt(strings.get(1));
+    public static void equAd(HashMap<Integer, Adventurer> adventuersMap,ArrayList<String> strings) {
+        int adventurerId = Integer.parseInt(strings.get(1));
         int equipmentId = Integer.parseInt(strings.get(2));
         String equipmentName = strings.get(3);
         int equipmentStar = Integer.parseInt(strings.get(4));
 
         Equipment equipment = new Equipment(equipmentId, equipmentName, equipmentStar);
-        adventuersMap.get(adventuerId).addEquipment(equipment);
+        adventuersMap.get(adventurerId).addEquipment(equipment);
     }
 
-    public static void equDe(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
-        int adventuerId = Integer.parseInt(strings.get(1));
+    public static void equDe(HashMap<Integer, Adventurer> adventuersMap,ArrayList<String> strings) {
+        int adventurerId = Integer.parseInt(strings.get(1));
         int equipmentId = Integer.parseInt(strings.get(2));
-        String equipmentName = adventuersMap.get(adventuerId).getEquipmentName(equipmentId);
-        adventuersMap.get(adventuerId).deleteEquipment(equipmentId);
-        int equipmentCount = adventuersMap.get(adventuerId).getEquipmentCount();
+        String equipmentName = adventuersMap.get(adventurerId).getEquipmentName(equipmentId);
+        adventuersMap.get(adventurerId).deleteEquipment(equipmentId);
+        int equipmentCount = adventuersMap.get(adventurerId).getEquipmentCount();
         System.out.println(equipmentCount + " " + equipmentName);
     }
 
-    public static void equUp(HashMap<Integer, Adventuer> adventuersMap, ArrayList<String> strings) {
-        int adventuerId = Integer.parseInt(strings.get(1));
+    public static void equUp(HashMap<Integer, Adventurer> adventuersMap,ArrayList<String> strings) {
+        int adventurerId = Integer.parseInt(strings.get(1));
         int equipmentId = Integer.parseInt(strings.get(2));
 
-        String equipmentName = adventuersMap.get(adventuerId).getEquipmentName(equipmentId);
-        adventuersMap.get(adventuerId).upgradeEquipment(equipmentId);
-        int equipmentStar = adventuersMap.get(adventuerId).getEquipmentStar(equipmentId);
+        String equipmentName = adventuersMap.get(adventurerId).getEquipmentName(equipmentId);
+        adventuersMap.get(adventurerId).upgradeEquipment(equipmentId);
+        int equipmentStar = adventuersMap.get(adventurerId).getEquipmentStar(equipmentId);
         System.out.println(equipmentName + " " + equipmentStar);
     }
 }

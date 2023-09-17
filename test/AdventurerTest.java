@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class AdventuerTest {
+public class AdventurerTest {
 
     @Test
     public void addBottle() {

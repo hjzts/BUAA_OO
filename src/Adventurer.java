@@ -5,13 +5,13 @@
  */
 import java.util.HashMap;
 
-public class Adventuer {
+public class Adventurer {
     private int id;
     private String name;
     private HashMap<Integer,Bottle> bottlesMap = new HashMap<>();
     private HashMap<Integer,Equipment> equipmentsMap = new HashMap<>();
 
-    public Adventuer(int id,String name) {
+    public Adventurer(int id, String name) {
         this.id = id;
         this.name = name;
     }
