@@ -2,7 +2,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class BottleTest {
+public class FoodTest {
 
     @Test
     public void getName() {
@@ -13,6 +13,6 @@ public class BottleTest {
     }
 
     @Test
-    public void getCapacity() {
+    public void getEnergy() {
     }
 }
