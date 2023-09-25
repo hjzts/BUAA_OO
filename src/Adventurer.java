@@ -18,8 +18,8 @@ public class Adventurer {
     public Adventurer(int id, String name) {
         this.id = id;
         this.name = name;
-        this.hitPoint = 0;
-        this.level = 0;
+        this.hitPoint = 500;
+        this.level = 1;
     }
 
     public int getHitPoint() {
@@ -126,7 +126,11 @@ public class Adventurer {
     }
 
     public int useBottle(String bottleName) {
-        return backpack.useBottle(bottleName);
+        int capacity =  backpack.useBottle(bottleName);
+        if(capacity == 0) {
+            bottlesMap.remove(getBottleId(bottleName));
+        }
+        return capacity;
     }
 
     public boolean hasFood(String foodName) {
@@ -135,8 +139,11 @@ public class Adventurer {
     public int getFoodId(String foodName) {
         return backpack.getFoodId(foodName);
     }
+
     public int useFood(String foodName) {
-        return backpack.useFood(foodName);
+        foodMap.remove(getFoodId(foodName));
+        int energy = backpack.useFood(foodName);
+        return energy;
     }
 
 
