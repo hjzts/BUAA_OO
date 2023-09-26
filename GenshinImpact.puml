@@ -1,0 +1,99 @@
+@startuml
+class Adventurer {
+- int id
+- String name
+- int hitPoint
+- int level
+- HashMap<Integer,Bottle> bottlesMap
+- HashMap<Integer,Equipment> equipmentsMap
+- HashMap<Integer,Food> foodMap
+- Backpack backpack
++ int getHitPoint()
++ int getLevel()
++ void increaseHitPoint(int)
++ void increaseLevel(int)
++ int getMaxBottles()
++ void addBottle(Bottle)
++ void deleteBottle(int)
++ int getBottleCount()
++ String getBottleName(int)
++ void addEquipment(Equipment)
++ void deleteEquipment(int)
++ void upgradeEquipment(int)
++ int getEquipmentCount()
++ String getEquipmentName(int)
++ int getEquipmentStar(int)
++ void addFood(Food)
++ String getFoodName(int)
++ int getFoodCount()
++ void deleteFood(int)
++ boolean hasFood(int)
++ void carryBottle(int)
++ void carryEquipment(int)
++ void carryFood(int)
++ boolean hasBottle(String)
++ int getBottleId(String)
++ int useBottle(String)
++ boolean hasFood(String)
++ int getFoodId(String)
++ int useFood(String)
+}
+class Bottle {
+- int id
+- String name
+- int capacity
++ String getName()
++ int getId()
++ int getCapacity()
++ void resetCapacity()
+}
+class Main {
++ {static} void main(String[])
++ {static} void operation(int,ArrayList<ArrayList<String>>)
++ {static} void adventurerAdd(HashMap<Integer,Adventurer>,ArrayList<String>)
++ {static} void bottleAdd(HashMap<Integer,Adventurer>,ArrayList<String>)
++ {static} void bottleDelete(HashMap<Integer,Adventurer>,ArrayList<String>)
++ {static} void equipmentAdd(HashMap<Integer,Adventurer>,ArrayList<String>)
++ {static} void equipmentDelete(HashMap<Integer,Adventurer>,ArrayList<String>)
++ {static} void equipmentUpgrade(HashMap<Integer,Adventurer>,ArrayList<String>)
++ {static} void foodAdd(HashMap<Integer,Adventurer>,ArrayList<String>)
++ {static} void foodDelete(HashMap<Integer,Adventurer>,ArrayList<String>)
++ {static} void equipmentCarry(HashMap<Integer,Adventurer>,ArrayList<String>)
++ {static} void bottleCarry(HashMap<Integer,Adventurer>,ArrayList<String>)
++ {static} void foodCarry(HashMap<Integer,Adventurer>,ArrayList<String>)
++ {static} void bottleUse(HashMap<Integer,Adventurer>,ArrayList<String>)
++ {static} void foodUse(HashMap<Integer,Adventurer>,ArrayList<String>)
+}
+class Backpack {
+- TreeMap<Integer,Bottle> bottleTreeMap
+- TreeMap<Integer,Equipment> equipmentTreeMap
+- TreeMap<Integer,Food> foodTreeMap
++ void carryEquipment(Equipment)
++ void carryBottle(Bottle)
++ void carryFood(Food)
++ int getBottleNum()
++ boolean hasBottle(String)
++ int getBottleId(String)
++ int useBottle(String)
++ boolean hasFood(String)
++ int getFoodId(String)
++ int useFood(String)
+}
+class Equipment {
+- int id
+- String name
+- int star
++ String getName()
++ int getId()
++ int getStar()
++ void upgrade()
+}
+class Food {
+- int id
+- String name
+- int energy
++ String getName()
++ int getId()
++ int getEnergy()
+}
+@enduml
