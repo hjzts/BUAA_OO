@@ -21,7 +21,6 @@ public class Main {
             String[] strings = nextLine.trim().split(" +"); // 按空格对行进行分割
             inputInfo.add(new ArrayList<>(Arrays.asList(strings))); // 将指令分割后的各个部分存进容器中
         }
-        //System.out.println("hello");
         operation(n, inputInfo); //进行操作
     }
 
@@ -201,12 +200,18 @@ public class Main {
             HashMap<Integer, Adventurer> adventurersMap, ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
         String bottleName = strings.get(2);
-        if (adventurersMap.get(adventurerId).hasBottleInBackpack(bottleName)) {
-            int bottleId = adventurersMap.get(adventurerId).getBottleId(bottleName);
-            int bottleCapacity = adventurersMap.get(adventurerId).useBottle(bottleName);
-            adventurersMap.get(adventurerId).increaseHitPoint(bottleCapacity);
-            int hitPoint = adventurersMap.get(adventurerId).getHitPoint();
-            System.out.println(bottleId + " " + hitPoint);
+
+        if(adventurersMap.get(adventurerId) != null) {
+            if(adventurersMap.get(adventurerId).hasBottle(bottleName)) {
+                int bottleId = adventurersMap.get(adventurerId).getBottleId(bottleName);
+                int bottleCapacity = adventurersMap.get(adventurerId).useBottle(bottleName);
+                adventurersMap.get(adventurerId).increaseHitPoint(bottleCapacity);
+                int hitPoint = adventurersMap.get(adventurerId).getHitPoint();
+                System.out.println(bottleId + " " + hitPoint);
+            }
+            else {
+                System.out.println("fail to use " + bottleName);
+            }
         }
         else {
             System.out.println("fail to use " + bottleName);
@@ -218,13 +223,19 @@ public class Main {
         int adventurerId = Integer.parseInt(strings.get(1));
         String foodName = strings.get(2);
 
-        if (adventurersMap.get(adventurerId).hasFoodInBackpack(foodName)) {
-            int foodID      =    adventurersMap.get(adventurerId).getFoodId(foodName);
-            int foodEnergy  =    adventurersMap.get(adventurerId).useFood(foodName);
-            adventurersMap.get(adventurerId).increaseLevel(foodEnergy);
-            int level       =    adventurersMap.get(adventurerId).getLevel();
-            System.out.println(foodID + " " + level);
+        if(adventurersMap.get(adventurerId) != null) {
+            if (adventurersMap.get(adventurerId).hasFood(foodName)) {
+                int foodID = adventurersMap.get(adventurerId).getFoodId(foodName);
+                int foodEnergy = adventurersMap.get(adventurerId).useFood(foodName);
+                adventurersMap.get(adventurerId).increaseLevel(foodEnergy);
+                int level = adventurersMap.get(adventurerId).getLevel();
+                System.out.println(foodID + " " + level);
+            }
+            else {
+                System.out.println("fail to eat " + foodName);
+            }
         }
+
         else {
             System.out.println("fail to eat " + foodName);
         }
