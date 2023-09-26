@@ -3,7 +3,6 @@ import org.junit.Before;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
@@ -23,9 +22,10 @@ public class MainTest {
     }
 
     @Test
-    public void testOperation() {
+    public void operation() {
         ArrayList<String> strings = new ArrayList<>();
 
+        // advId = 1; bottleId = 11; equipmentId = 111; foodId = 1111;
         strings.add("1");
         strings.add("1");
         strings.add("advName");
@@ -53,6 +53,7 @@ public class MainTest {
         inputInfo.add(strings);
         strings.clear();
 
+
         strings.add("5");
         strings.add("1");
         strings.add("111");
@@ -69,59 +70,115 @@ public class MainTest {
 
         strings.add("6");
         strings.add("111");
-        Main.operation(14, inputInfo);
+        inputInfo.add(strings);
+        strings.clear();
+
+
+        strings.add("7");
+        strings.add("1");
+        strings.add("1111");
+        strings.add("foodName");
+        strings.add("1");
+        inputInfo.add(strings);
+        strings.clear();
+
+        strings.add("8");
+        strings.add("1");
+        strings.add("1111");
+        inputInfo.add(strings);
+        strings.clear();
+
+        strings.add("7");
+        strings.add("1");
+        strings.add("1111");
+        strings.add("foodName");
+        strings.add("1");
+        inputInfo.add(strings);
+        strings.clear();
+
+        strings.add("9");
+        strings.add("1");
+        strings.add("111");
+        inputInfo.add(strings);
+        strings.clear();
+
+        strings.add("10");
+        strings.add("1");
+        strings.add("11");
+        inputInfo.add(strings);
+        strings.clear();
+
+        strings.add("11");
+        strings.add("1");
+        strings.add("1111");
+        inputInfo.add(strings);
+        strings.clear();
+
+        strings.add("12");
+        strings.add("1");
+        strings.add("bottleName");
+        inputInfo.add(strings);
+        strings.clear();
+
+        strings.add("13");
+        strings.add("1");
+        strings.add("foodName");
+        inputInfo.add(strings);
+        strings.clear();
+
+        Main.operation(15, inputInfo);
         assertEquals(1, adventurersMap.size());
     }
 
     @Test
-    public void testAdventurerAdd() {
+    public void adventurerAdd() {
     }
 
     @Test
-    public void testBottleAdd() {
+    public void bottleAdd() {
     }
 
     @Test
-    public void testBottleDelete() {
+    public void bottleDelete() {
     }
 
     @Test
-    public void testEquipmentAdd() {
+    public void equipmentAdd() {
     }
 
     @Test
-    public void testEquipmentDelete() {
+    public void equipmentDelete() {
     }
 
     @Test
-    public void testEquipmentUpgrade() {
+    public void equipmentUpgrade() {
     }
 
     @Test
-    public void testFoodAdd() {
+    public void foodAdd() {
     }
 
     @Test
-    public void testFoodDelete() {
+    public void foodDelete() {
     }
 
     @Test
-    public void testEquipmentCarry() {
+    public void equipmentCarry() {
     }
 
     @Test
-    public void testBottleCarry() {
+    public void bottleCarry() {
     }
 
     @Test
-    public void testFoodCarry() {
+    public void foodCarry() {
     }
 
     @Test
-    public void testBottleUse() {
+    public void bottleUse() {
     }
 
     @Test
-    public void testFoodUse() {
+    public void foodUse() {
     }
 }

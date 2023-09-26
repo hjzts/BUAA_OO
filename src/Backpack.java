@@ -12,6 +12,18 @@ public class Backpack {
     private TreeMap<Integer, Equipment> equipmentTreeMap = new TreeMap<>();
     private TreeMap<Integer, Food> foodTreeMap = new TreeMap<>();
 
+    public TreeMap getBottleTreeMap() {
+        return bottleTreeMap;
+    }
+
+    public TreeMap getEquipmentTreeMap() {
+        return equipmentTreeMap;
+    }
+
+    public TreeMap getFoodTreeMap() {
+        return foodTreeMap;
+    }
+
     public void carryEquipment(Equipment equipment) {
         // 遍历，如果有同名的先把那个删除
         if (equipmentTreeMap.isEmpty()) {
@@ -31,6 +43,12 @@ public class Backpack {
         }
     }
 
+    public void deleteEquipment(int equipmentId) {
+        if (equipmentTreeMap.containsKey(equipmentId)) {
+            equipmentTreeMap.remove(equipmentId);
+        }
+    }
+
     public void carryBottle(Bottle bottle) {
         bottleTreeMap.put(bottle.getId(), bottle);
     }
@@ -46,6 +64,16 @@ public class Backpack {
 
     public int getBottleNum() {
         return bottleTreeMap.size();
+    }
+
+    public int getSameNameBottleNum(String bottleName) {
+        int num = 0;
+        for (Integer key: bottleTreeMap.keySet()) {
+            if (bottleTreeMap.get(key).getName().equals(bottleName)) {
+                num++;
+            }
+        }
+        return num;
     }
     
     public boolean hasBottle(String bottleName) {
@@ -65,32 +93,61 @@ public class Backpack {
             return 0;
         }
         else {
+            boolean flag = false;
+            int bottleId = 0;
             for (Integer key : bottleTreeMap.keySet()) {
                 if (bottleTreeMap.get(key).getName().equals(bottleName)) {
-                    return bottleTreeMap.get(key).getId();
+                    if (!flag) {
+                        bottleId = key;
+                        flag = true;
+                    }
+                    else if (bottleId > key) {
+                        bottleId = key;
+                    }
+                    else {
+                        continue;
+                    }
                 }
             }
-            return 0;
+            return bottleId;
         }
-
     }
 
     public int useBottle(String bottleName) {
+        int capacity = 0;
+        int bottleId = 0;
+        boolean flag = false;
         for (Integer key: bottleTreeMap.keySet()) {
             if (bottleTreeMap.get(key).getName().equals(bottleName)) {
-                int capacity = bottleTreeMap.get(key).getCapacity();
-                if (capacity == 0) {
-                    bottleTreeMap.remove(key);
+                if (!flag) {
+                    capacity = bottleTreeMap.get(key).getCapacity();
+                    bottleId = key;
+                    flag = true;
+                }
+                else if (bottleId > key) {
+                    capacity = bottleTreeMap.get(key).getCapacity();
+                    bottleId = key;
                 }
                 else {
-                    bottleTreeMap.get(key).resetCapacity();
+                    continue;
                 }
-                return capacity;
             }
         }
-        return 0;
+        if (capacity == 0) {
+            bottleTreeMap.remove(bottleId);
+        }
+        else {
+            bottleTreeMap.get(bottleId).resetCapacity();
+        }
+        return capacity;
     }
-    
+
+    public void deleteBottle(int bottleId) {
+        if (bottleTreeMap.containsKey(bottleId)) {
+            bottleTreeMap.remove(bottleId);
+        }
+    }
+
     public boolean hasFoodById(int foodId) {
         return foodTreeMap.containsKey(foodId);
     }
@@ -125,5 +182,11 @@ public class Backpack {
             }
         }
         return 0;
+    }
+
+    public void deleteFood(int foodId) {
+        if (foodTreeMap.containsKey(foodId)) {
+            foodTreeMap.remove(foodId);
+        }
     }
 }

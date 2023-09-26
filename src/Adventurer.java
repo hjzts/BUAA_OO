@@ -41,7 +41,7 @@ public class Adventurer {
     }
 
     public int getMaxBottles() {
-        return (int) (level / 5) + 1;
+        return (level / 5) + 1;
     }
 
     //bottle
@@ -51,26 +51,7 @@ public class Adventurer {
 
     public void deleteBottle(int bottleId) {
         bottlesMap.remove(bottleId);
-    }
-
-    public void deleteBottleByName(String bottleName) {
-        int bottleId = 0;
-        boolean flag = false;
-        for (Integer key : bottlesMap.keySet()) {
-            if (bottlesMap.get(key).getName().equals(bottleName)) {
-                bottleId = key;
-                if (!flag) {
-                    bottleId = bottlesMap.get(key).getId();
-                }
-                else if (bottleId > bottlesMap.get(key).getId()) {
-                    bottleId = bottlesMap.get(key).getId();
-                }
-                else {
-                    continue;
-                }
-            }
-        }
-        bottlesMap.remove(bottleId);
+        backpack.deleteBottle(bottleId);
     }
 
     public int getBottleCount() {
@@ -91,6 +72,7 @@ public class Adventurer {
 
     public void deleteEquipment(int equipmentId) {
         equipmentsMap.remove(equipmentId);
+        backpack.deleteEquipment(equipmentId);
     }
 
     public void upgradeEquipment(int equipmentId) {
@@ -125,27 +107,7 @@ public class Adventurer {
 
     public void deleteFood(int foodId) {
         foodMap.remove(foodId);
-    }
-
-    public void deleleFoodByName(String foodName) {
-        int foodId = 0;
-        boolean flag = false;
-        for (Integer key : foodMap.keySet()) {
-            if (foodMap.get(key).getName().equals(foodName)) {
-                foodId = key;
-                if (! flag) {
-                    flag = true;
-                    foodId = foodMap.get(key).getId();
-                }
-                else if (foodId > foodMap.get(key).getId()) {
-                    foodId = foodMap.get(key).getId();
-                }
-                else {
-                    continue;
-                }
-            }
-        }
-        foodMap.remove(foodId);
+        backpack.deleteFood(foodId);
     }
 
     public boolean hasFoodInBackpack(int foodId) {
@@ -157,7 +119,11 @@ public class Adventurer {
     }
 
     public void carryBottle(int bottleId) {
-        if (backpack.getBottleNum() >= getMaxBottles()) {
+        if (! bottlesMap.containsKey(bottleId)) {
+            return;
+        }
+        String bottleName = bottlesMap.get(bottleId).getName();
+        if (backpack.getSameNameBottleNum(bottleName) >= getMaxBottles()) {
             return;
         }
         backpack.carryBottle(bottlesMap.get(bottleId));
@@ -184,27 +150,7 @@ public class Adventurer {
     }
 
     public int getBottleId(String bottleName) {
-        int bottleId = 0;
-        boolean flag = false;
-        for (Integer key : bottlesMap.keySet()) {
-            if (bottlesMap.get(key).getName().equals(bottleName)) {
-                bottleId = key;
-                if (! flag) {
-                    flag = true;
-                    bottleId = bottlesMap.get(key).getId();
-                }
-                else if (bottleId > bottlesMap.get(key).getId()) {
-                    bottleId = bottlesMap.get(key).getId();
-                }
-                else {
-                    continue;
-                }
-            }
-        }
-        if (flag) {
-            return bottleId;
-        }
-        return 0;
+        return backpack.getBottleId(bottleName);
     }
 
     public int useBottle(String bottleName) {
