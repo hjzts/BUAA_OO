@@ -201,8 +201,8 @@ public class Main {
         int adventurerId = Integer.parseInt(strings.get(1));
         String bottleName = strings.get(2);
 
-        if(adventurersMap.get(adventurerId) != null) {
-            if(adventurersMap.get(adventurerId).hasBottle(bottleName)) {
+        if (adventurersMap.get(adventurerId) != null) {
+            if (adventurersMap.get(adventurerId).hasBottle(bottleName)) {
                 int bottleId = adventurersMap.get(adventurerId).getBottleId(bottleName);
                 int bottleCapacity = adventurersMap.get(adventurerId).useBottle(bottleName);
                 adventurersMap.get(adventurerId).increaseHitPoint(bottleCapacity);
@@ -223,7 +223,7 @@ public class Main {
         int adventurerId = Integer.parseInt(strings.get(1));
         String foodName = strings.get(2);
 
-        if(adventurersMap.get(adventurerId) != null) {
+        if (adventurersMap.get(adventurerId) != null) {
             if (adventurersMap.get(adventurerId).hasFood(foodName)) {
                 int foodID = adventurersMap.get(adventurerId).getFoodId(foodName);
                 int foodEnergy = adventurersMap.get(adventurerId).useFood(foodName);
@@ -235,7 +235,6 @@ public class Main {
                 System.out.println("fail to eat " + foodName);
             }
         }
-
         else {
             System.out.println("fail to eat " + foodName);
         }

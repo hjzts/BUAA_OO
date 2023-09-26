@@ -149,11 +149,11 @@ public class Adventurer {
     }
 
     public boolean hasFoodInBackpack(int foodId) {
-        return backpack.hasFood(foodId);
+        return backpack.hasFoodById(foodId);
     }
 
     public boolean hasFoodInBackpack(String foodName) {
-        return backpack.hasFood(foodName);
+        return backpack.hasFoodByName(foodName);
     }
 
     public void carryBottle(int bottleId) {
