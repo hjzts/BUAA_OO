@@ -12,7 +12,6 @@ public class Backpack {
     private TreeMap<Integer, Equipment> equipmentTreeMap = new TreeMap<>();
     private TreeMap<Integer, Food> foodTreeMap = new TreeMap<>();
 
-
     public void carryEquipment(Equipment equipment) {
         // 遍历，如果有同名的先把那个删除
         if (equipmentTreeMap.isEmpty()) {
