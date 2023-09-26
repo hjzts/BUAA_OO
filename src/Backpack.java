@@ -6,22 +6,20 @@
  */
 
 import java.util.TreeMap;
-import java.util.Iterator;
 
 public class Backpack {
     private TreeMap<Integer, Bottle> bottleTreeMap = new TreeMap<>();
     private TreeMap<Integer, Equipment> equipmentTreeMap = new TreeMap<>();
     private TreeMap<Integer, Food> foodTreeMap = new TreeMap<>();
 
-
     public void carryEquipment(Equipment equipment) {
         // 遍历，如果有同名的先把那个删除
-        if(equipmentTreeMap.isEmpty()) {
+        if (equipmentTreeMap.isEmpty()) {
             equipmentTreeMap.put(equipment.getId(), equipment);
         }
         else {
             for (Integer key : equipmentTreeMap.keySet()) {
-                if(equipmentTreeMap.get(key) == null) {
+                if (equipmentTreeMap.get(key) == null) {
                     break;
                 }
                 if (equipmentTreeMap.get(key).getName().equals(equipment.getName())) {
@@ -34,14 +32,17 @@ public class Backpack {
     }
 
     public void carryBottle(Bottle bottle) {
+        if (bottle == null) {
+            return;
+        }
         bottleTreeMap.put(bottle.getId(), bottle);
     }
 
     public void carryFood(Food food) {
-        if (foodTreeMap.containsValue(food)) {
-            int id = food.getId();
-            foodTreeMap.replace(id, food);
-        } else {
+        if (! foodTreeMap.containsValue(food)) {
+            if (food == null) {
+                return;
+            }
             foodTreeMap.put(food.getId(), food);
         }
     }
@@ -50,12 +51,11 @@ public class Backpack {
         return bottleTreeMap.size();
     }
 
-
     public boolean hasBottle(String bottleName) {
         if (bottleTreeMap.isEmpty()) {
             return false;
         }
-        for (Integer key: bottleTreeMap.keySet() ) {
+        for (Integer key: bottleTreeMap.keySet()) {
             if (bottleTreeMap.get(key).getName().equals(bottleName)) {
                 return true;
             }
@@ -64,7 +64,7 @@ public class Backpack {
     }
 
     public int getBottleId(String bottleName) {
-        if(bottleTreeMap.isEmpty()) {
+        if (bottleTreeMap.isEmpty()) {
             return 0;
         }
         else {
@@ -79,10 +79,10 @@ public class Backpack {
     }
 
     public int useBottle(String bottleName) {
-        for (Integer key: bottleTreeMap.keySet() ) {
+        for (Integer key: bottleTreeMap.keySet()) {
             if (bottleTreeMap.get(key).getName().equals(bottleName)) {
                 int capacity = bottleTreeMap.get(key).getCapacity();
-                if(capacity == 0) {
+                if (capacity == 0) {
                     bottleTreeMap.remove(key);
                 }
                 else {
@@ -98,12 +98,16 @@ public class Backpack {
         if (foodTreeMap.isEmpty()) {
             return false;
         }
-        for (Integer key : foodTreeMap.keySet() ) {
+        for (Integer key : foodTreeMap.keySet()) {
             if (foodTreeMap.get(key).getName().equals(foodName)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean hasFood(int foodId) {
+        return foodTreeMap.containsKey(foodId);
     }
 
     public int getFoodId(String foodName) {
@@ -116,7 +120,7 @@ public class Backpack {
     }
 
     public int useFood(String foodName) {
-        for (Integer key: foodTreeMap.keySet() ) {
+        for (Integer key: foodTreeMap.keySet()) {
             if (foodTreeMap.get(key).getName().equals(foodName)) {
                 int energy = foodTreeMap.get(key).getEnergy();
                 foodTreeMap.remove(key);

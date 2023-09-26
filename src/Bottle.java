@@ -26,7 +26,7 @@ public class Bottle {
         return capacity;
     }
 
-    public void resetCapacity(){
+    public void resetCapacity() {
         this.capacity = 0;
     }
 
