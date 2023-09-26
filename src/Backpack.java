@@ -34,14 +34,16 @@ public class Backpack {
     }
 
     public void carryBottle(Bottle bottle) {
-        bottleTreeMap.put(bottle.getId(), bottle);
+        if(bottle == null) {
+            bottleTreeMap.put(bottle.getId(), bottle);
+        }
     }
 
     public void carryFood(Food food) {
-        if (foodTreeMap.containsValue(food)) {
-            int id = food.getId();
-            foodTreeMap.replace(id, food);
-        } else {
+        if (! foodTreeMap.containsValue(food)) {
+            if(food == null) {
+                return;
+            }
             foodTreeMap.put(food.getId(), food);
         }
     }
@@ -105,6 +107,11 @@ public class Backpack {
         }
         return false;
     }
+
+    public boolean hasFood(int foodId) {
+        return foodTreeMap.containsKey(foodId);
+    }
+
 
     public int getFoodId(String foodName) {
         for (Integer key : foodTreeMap.keySet()) {

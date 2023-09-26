@@ -21,6 +21,7 @@ public class Main {
             String[] strings = nextLine.trim().split(" +"); // 按空格对行进行分割
             inputInfo.add(new ArrayList<>(Arrays.asList(strings))); // 将指令分割后的各个部分存进容器中
         }
+//        System.out.println("hello");
         operation(n, inputInfo); //进行操作
     }
 
@@ -202,7 +203,7 @@ public class Main {
         String bottleName = strings.get(2);
 
         if(adventurersMap.get(adventurerId) != null) {
-            if(adventurersMap.get(adventurerId).hasBottle(bottleName)) {
+            if(adventurersMap.get(adventurerId).hasBottleInBackpack(bottleName)) {
                 int bottleId = adventurersMap.get(adventurerId).getBottleId(bottleName);
                 int bottleCapacity = adventurersMap.get(adventurerId).useBottle(bottleName);
                 adventurersMap.get(adventurerId).increaseHitPoint(bottleCapacity);
@@ -224,11 +225,13 @@ public class Main {
         String foodName = strings.get(2);
 
         if(adventurersMap.get(adventurerId) != null) {
-            if (adventurersMap.get(adventurerId).hasFood(foodName)) {
-                int foodID = adventurersMap.get(adventurerId).getFoodId(foodName);
-                int foodEnergy = adventurersMap.get(adventurerId).useFood(foodName);
+            if (adventurersMap.get(adventurerId).hasFoodInBackpack(foodName)) {
+                int foodID      =    adventurersMap.get(adventurerId).getFoodId(foodName);
+                int foodEnergy  =    adventurersMap.get(adventurerId).useFood(foodName);
+
                 adventurersMap.get(adventurerId).increaseLevel(foodEnergy);
-                int level = adventurersMap.get(adventurerId).getLevel();
+
+                int level       =    adventurersMap.get(adventurerId).getLevel();
                 System.out.println(foodID + " " + level);
             }
             else {
