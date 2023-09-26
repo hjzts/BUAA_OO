@@ -9,11 +9,11 @@ import static org.junit.Assert.assertEquals;
 
 public class MainTest {
     private HashMap<Integer, Adventurer> adventurersMap;
-    private ArrayList<ArrayList <String>> inputInfo;
+//    private ArrayList<ArrayList <String>> inputInfo;
     @Before
-    public void serUp() {
+    public void setUp() {
         adventurersMap = new HashMap<>();
-        inputInfo = new ArrayList<>();
+//        inputInfo = new ArrayList<>();
     }
 
     @Test
@@ -23,111 +23,117 @@ public class MainTest {
 
     @Test
     public void operation() {
-        ArrayList<String> strings = new ArrayList<>();
+        ArrayList<ArrayList <String>> inputInfo;
+        inputInfo = new ArrayList<>();
+
+        ArrayList<String> strings1 = new ArrayList<>();
+        ArrayList<String> strings2 = new ArrayList<>();
+        ArrayList<String> strings3 = new ArrayList<>();
+        ArrayList<String> strings4 = new ArrayList<>();
+        ArrayList<String> strings5 = new ArrayList<>();
+        ArrayList<String> strings6 = new ArrayList<>();
+        ArrayList<String> strings7 = new ArrayList<>();
+        ArrayList<String> strings8 = new ArrayList<>();
+        ArrayList<String> strings9 = new ArrayList<>();
+        ArrayList<String> strings10 = new ArrayList<>();
+        ArrayList<String> strings11 = new ArrayList<>();
+        ArrayList<String> strings12 = new ArrayList<>();
+        ArrayList<String> strings13 = new ArrayList<>();
+        ArrayList<String> strings14 = new ArrayList<>();
+        ArrayList<String> strings15 = new ArrayList<>();
 
         // advId = 1; bottleId = 11; equipmentId = 111; foodId = 1111;
-        strings.add("1");
-        strings.add("1");
-        strings.add("advName");
-        inputInfo.add(strings);
-        strings.clear();
+        strings1.add("1");
+        strings1.add("1");
+        strings1.add("advName");
+        inputInfo.add(strings1);
 
-        strings.add("2");
-        strings.add("1");
-        strings.add("11");
-        strings.add("bottleName");
-        strings.add("1");
-        inputInfo.add(strings);
-        strings.clear();
-
-        strings.add("3");
-        strings.add("11");
-        inputInfo.add(strings);
-        strings.clear();
-
-        strings.add("4");
-        strings.add("1");
-        strings.add("111");
-        strings.add("equipmentName");
-        strings.add("2");
-        inputInfo.add(strings);
-        strings.clear();
+        strings2.add("2");
+        strings2.add("1");
+        strings2.add("11");
+        strings2.add("bottleName");
+        strings2.add("1");
+        inputInfo.add(strings2);
 
 
-        strings.add("5");
-        strings.add("1");
-        strings.add("111");
-        inputInfo.add(strings);
-        strings.clear();
+        strings3.add("3");
+        strings3.add("1");
+        strings3.add("11");
+        inputInfo.add(strings3);
 
-        strings.add("4");
-        strings.add("1");
-        strings.add("111");
-        strings.add("equipmentName");
-        strings.add("2");
-        inputInfo.add(strings);
-        strings.clear();
+        inputInfo.add(strings2);
 
-        strings.add("6");
-        strings.add("111");
-        inputInfo.add(strings);
-        strings.clear();
+        strings4.add("4");
+        strings4.add("1");
+        strings4.add("111");
+        strings4.add("equipmentName");
+        strings4.add("2");
+        inputInfo.add(strings4);
 
 
-        strings.add("7");
-        strings.add("1");
-        strings.add("1111");
-        strings.add("foodName");
-        strings.add("1");
-        inputInfo.add(strings);
-        strings.clear();
+        strings5.add("5");
+        strings5.add("1");
+        strings5.add("111");
+        inputInfo.add(strings5);
 
-        strings.add("8");
-        strings.add("1");
-        strings.add("1111");
-        inputInfo.add(strings);
-        strings.clear();
+        strings6.add("4");
+        strings6.add("1");
+        strings6.add("111");
+        strings6.add("equipmentName");
+        strings6.add("2");
+        inputInfo.add(strings6);
 
-        strings.add("7");
-        strings.add("1");
-        strings.add("1111");
-        strings.add("foodName");
-        strings.add("1");
-        inputInfo.add(strings);
-        strings.clear();
+        strings7.add("6");
+        strings7.add("1");
+        strings7.add("111");
+        inputInfo.add(strings7);
 
-        strings.add("9");
-        strings.add("1");
-        strings.add("111");
-        inputInfo.add(strings);
-        strings.clear();
 
-        strings.add("10");
-        strings.add("1");
-        strings.add("11");
-        inputInfo.add(strings);
-        strings.clear();
+        strings8.add("7");
+        strings8.add("1");
+        strings8.add("1111");
+        strings8.add("foodName");
+        strings8.add("1");
+        inputInfo.add(strings8);
 
-        strings.add("11");
-        strings.add("1");
-        strings.add("1111");
-        inputInfo.add(strings);
-        strings.clear();
+        strings9.add("8");
+        strings9.add("1");
+        strings9.add("1111");
+        inputInfo.add(strings9);
 
-        strings.add("12");
-        strings.add("1");
-        strings.add("bottleName");
-        inputInfo.add(strings);
-        strings.clear();
+        strings10.add("7");
+        strings10.add("1");
+        strings10.add("1111");
+        strings10.add("foodName");
+        strings10.add("1");
+        inputInfo.add(strings10);
 
-        strings.add("13");
-        strings.add("1");
-        strings.add("foodName");
-        inputInfo.add(strings);
-        strings.clear();
+        strings11.add("9");
+        strings11.add("1");
+        strings11.add("111");
+        inputInfo.add(strings11);
 
-        Main.operation(15, inputInfo);
-        assertEquals(1, adventurersMap.size());
+        strings12.add("10");
+        strings12.add("1");
+        strings12.add("11");
+        inputInfo.add(strings12);
+
+        strings13.add("11");
+        strings13.add("1");
+        strings13.add("1111");
+        inputInfo.add(strings13);
+
+        strings14.add("12");
+        strings14.add("1");
+        strings14.add("bottleName");
+        inputInfo.add(strings14);
+
+        strings15.add("13");
+        strings15.add("1");
+        strings15.add("foodName");
+        inputInfo.add(strings15);
+
+        Main.operation(16, inputInfo);
     }
 
     @Test

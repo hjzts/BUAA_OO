@@ -12,17 +12,6 @@ public class Backpack {
     private TreeMap<Integer, Equipment> equipmentTreeMap = new TreeMap<>();
     private TreeMap<Integer, Food> foodTreeMap = new TreeMap<>();
 
-    public TreeMap getBottleTreeMap() {
-        return bottleTreeMap;
-    }
-
-    public TreeMap getEquipmentTreeMap() {
-        return equipmentTreeMap;
-    }
-
-    public TreeMap getFoodTreeMap() {
-        return foodTreeMap;
-    }
 
     public void carryEquipment(Equipment equipment) {
         // 遍历，如果有同名的先把那个删除
@@ -60,10 +49,6 @@ public class Backpack {
         } else {
             foodTreeMap.put(food.getId(), food);
         }
-    }
-
-    public int getBottleNum() {
-        return bottleTreeMap.size();
     }
 
     public int getSameNameBottleNum(String bottleName) {
