@@ -24,6 +24,14 @@ public class Adventurer {
         this.level = 1;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public int getHitPoint() {
         return hitPoint;
     }

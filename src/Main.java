@@ -9,24 +9,47 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 
     public static void main(String[] args) {
+        int n = getOperationLine();
+        ArrayList<ArrayList<String>> inputInfo = getInputInfo(n);
+        operation(n, inputInfo); //进行操作
+    }
+
+    public static int getOperationLine() {
+        Scanner scanner = new Scanner(System.in);
+        return Integer.parseInt(scanner.nextLine().trim()); // 读取行数
+    }
+
+    public static ArrayList<ArrayList<String>> getInputInfo(int n) {
         ArrayList<ArrayList<String>> inputInfo = new ArrayList<>(); // 解析后的输入将会存进该容器中, 类似于c语言的二维数组
         Scanner scanner = new Scanner(System.in);
-        int n = Integer.parseInt(scanner.nextLine().trim()); // 读取行数
         for (int i = 0; i < n; ++i) {
             String nextLine = scanner.nextLine(); // 读取本行指令
             String[] strings = nextLine.trim().split(" +"); // 按空格对行进行分割
-            inputInfo.add(new ArrayList<>(Arrays.asList(strings))); // 将指令分割后的各个部分存进容器中
+            ArrayList<String> operation = new ArrayList(Arrays.asList(strings));
+            if (operation.get(0).equals("14")) {
+                int k = Integer.parseInt(operation.get(2));
+                for (int j = 0; j < k; j++) {
+                    String nextLine1 = scanner.nextLine();
+                    operation.add(nextLine1.trim());
+                }
+            }
+            System.out.println(operation);
+            inputInfo.add(operation); // 将指令分割后的各个部分存进容器中
         }
-        operation(n, inputInfo); //进行操作
+        System.out.println(inputInfo);
+        return inputInfo;
     }
 
     public static void operation(int n, ArrayList<ArrayList<String>> inputInfo) {
         boolean printTestFlag = false;
         HashMap<Integer, Adventurer> adventurersMap = new HashMap<>();
+        FightMode fightMode = new FightMode();
         for (int i = 0; i < n; ++i) {
             ArrayList<String> strings = inputInfo.get(i); // 获取第i行指令
             switch (strings.get(0)) { // 获取第i行指令的第一个部分
@@ -87,6 +110,14 @@ public class Main {
                     // Food.use();
                     //if(printTestFlag)  System.out.print("13 :");
                     foodUse(adventurersMap,strings);
+                    break;
+                case "14":
+                    // Enter Fight Mode
+                    enterFightMode(adventurersMap,strings,fightMode);
+                    break;
+                case "15":
+                    break;
+                case "16":
                     break;
                 default:
                     break;
@@ -238,4 +269,50 @@ public class Main {
         }
     }
 
+    public static void enterFightMode(
+            HashMap<Integer, Adventurer> adventuresMap, ArrayList<String> strings,
+            FightMode fightMode) {
+        int m = Integer.parseInt(strings.get(1));
+        int k = Integer.parseInt(strings.get(2));
+        for (int i = 3; i < m + 3; i++) {
+            int adventurerId = getAdventurerId(adventuresMap, strings.get(i));
+            if (adventurerId == -1) {
+                System.out.println("the adventurer does not exist when try to enter fight mode");
+            } else {
+                fightMode.enterFightMode(adventuresMap.get(adventurerId));
+            }
+        }
+        String regexPattern1 = "(\\d{4})/(\\d{2})-(\\S+)-(\\S+)";
+        String regexPattern2 = "(\\d{4})/(\\d{2})-(\\S+)@(\\S+)-(\\S+)";
+        String regexPattern3 = "(\\d{4})/(\\d{2})-(\\S+)@#-(\\S+)";
+        Pattern pattern1 = Pattern.compile(regexPattern1);
+        Pattern pattern2 = Pattern.compile(regexPattern2);
+        Pattern pattern3 = Pattern.compile(regexPattern3);
+        for (int i = m + 4; i < m + 4 + k; i++) {
+            Matcher matcher1 = pattern1.matcher(strings.get(i));
+            Matcher matcher2 = pattern2.matcher(strings.get(i));
+            Matcher matcher3 = pattern3.matcher(strings.get(i));
+            if (matcher3.find()) {
+                fightMode.useBottle(new ArrayList<>(Arrays.asList(matcher3.group().split("(@#)?-"))));
+            } else if (matcher2.find()) {
+                ArrayList<String> input = new ArrayList<>(Arrays.asList(matcher2.group().split("@|-")));
+            } else if (matcher1.find()) {
+                fightMode.useBottle(new ArrayList<>(Arrays.asList(matcher1.group().split("-"))));
+            }
+            else {
+                System.out.println("wrong fight mode input");
+            }
+        }
+        fightMode.exitFightMode();
+    }
+
+    public static int getAdventurerId(
+            HashMap<Integer, Adventurer> adventurersMap,String name) {
+        for (Integer key: adventurersMap.keySet()) {
+            if (adventurersMap.get(key).getName().equals(name)) {
+                return key;
+            }
+        }
+        return -1;
+    }
 }
