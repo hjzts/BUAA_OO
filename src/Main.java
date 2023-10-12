@@ -45,7 +45,7 @@ public class Main {
             // System.out.println(operation);
             inputInfo.add(operation); // 将指令分割后的各个部分存进容器中
         }
-         System.out.println(inputInfo);
+        // System.out.println(inputInfo);
         return inputInfo;
     }
 
@@ -177,7 +177,7 @@ public class Main {
     public static void equipmentDelete(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
         int equipmentId = Integer.parseInt(strings.get(2));
-        if(adventurersMap.get(adventurerId) == null){
+        if (adventurersMap.get(adventurerId) == null) {
             System.out.println("有脏东西");
             return;
         }
