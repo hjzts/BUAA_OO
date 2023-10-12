@@ -45,7 +45,7 @@ public class Main {
             // System.out.println(operation);
             inputInfo.add(operation); // 将指令分割后的各个部分存进容器中
         }
-        // System.out.println(inputInfo);
+         System.out.println(inputInfo);
         return inputInfo;
     }
 
