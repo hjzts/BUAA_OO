@@ -11,18 +11,21 @@ import java.util.TreeMap;
 
 public class FightMode {
     private HashMap<Integer,Adventurer> adventurerMap = new HashMap<>();
-    private TreeMap<String, ArrayList<String>> fightLog = new TreeMap<>();
-    private HashMap<Integer,ArrayList<String>> attackLog = new HashMap<>();
-    private HashMap<Integer,ArrayList<String>> beAttackedLog = new HashMap<>();
+    private TreeMap<String, ArrayList<String>> fightLogTimeTree = new TreeMap<>();
+    private HashMap<Integer,ArrayList<String>> attackLogMap = new HashMap<>();
+    private HashMap<Integer,ArrayList<String>> beAttackedLogMap = new HashMap<>();
 
     public void enterFightMode(Adventurer adventurer) {
         adventurerMap.put(adventurer.getId(),adventurer);
     }
 
-    public void useBottle(ArrayList<String> input) {
-        fightLog.put(input.get(0),input);
+    public ArrayList<String> useBottle(ArrayList<String> input,int adventurerId) {
+        fightLogTimeTree.put(input.get(0),input);
         ArrayList<String> strings = new ArrayList<>();
-        int adventurerId =
+        strings.add(Integer.toString(adventurerId));
+        strings.add(input.get(2));
+        Main.bottleUse(strings);
+        return strings;
     }
 
     public void attackOne(ArrayList<String> input) {

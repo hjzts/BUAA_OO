@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 
 public class Main {
 
+
     public static void main(String[] args) {
         int n = getOperationLine();
         ArrayList<ArrayList<String>> inputInfo = getInputInfo(n);
@@ -293,13 +294,17 @@ public class Main {
             Matcher matcher2 = pattern2.matcher(strings.get(i));
             Matcher matcher3 = pattern3.matcher(strings.get(i));
             if (matcher3.find()) {
-                fightMode.useBottle(new ArrayList<>(Arrays.asList(matcher3.group().split("(@#)?-"))));
+                ArrayList<String> input = new ArrayList<>(Arrays.asList(matcher3.group().split("(@#)?-")));
             } else if (matcher2.find()) {
-                ArrayList<String> input = new ArrayList<>(Arrays.asList(matcher2.group().split("@|-")));
+                ArrayList<String> attackOne = new ArrayList<>(Arrays.asList(matcher2.group().split("@|-")));
+                int attackerId = getAdventurerId(adventuresMap, attackOne.get(1));
+                int beAttackedId = getAdventurerId(adventuresMap, attackOne.get(2));
             } else if (matcher1.find()) {
-                fightMode.useBottle(new ArrayList<>(Arrays.asList(matcher1.group().split("-"))));
-            }
-            else {
+                ArrayList<String> useBottle = new ArrayList<>(Arrays.asList(matcher1.group().split("-")));
+                int adventurerId = getAdventurerId(adventuresMap, useBottle.get(1));
+                strings = fightMode.useBottle(useBottle,adventurerId);
+                bottleUse(adventuresMap,strings);
+            } else {
                 System.out.println("wrong fight mode input");
             }
         }
