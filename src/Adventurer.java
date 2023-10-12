@@ -44,6 +44,10 @@ public class Adventurer {
         this.hitPoint += bottleCapacity;
     }
 
+    public void decreaseHitPoint(int decreaseHitPoint) {
+        this.hitPoint -= decreaseHitPoint;
+    }
+
     public void increaseLevel(int foodEnergy) {
         this.level += foodEnergy;
     }
@@ -98,6 +102,14 @@ public class Adventurer {
 
     public int getEquipmentStar(int equipmentId) {
         return equipmentsMap.get(equipmentId).getStar();
+    }
+
+    public int getEquipmentCarriedStar(String equipmentName) {
+        return backpack.getEquipmentStar(equipmentName);
+    }
+
+    public boolean hasEquipmentInBackpack(String equipmentName) {
+        return backpack.hasEquipment(equipmentName);
     }
 
     //food

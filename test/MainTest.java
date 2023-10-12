@@ -41,12 +41,27 @@ public class MainTest {
         ArrayList<String> strings13 = new ArrayList<>();
         ArrayList<String> strings14 = new ArrayList<>();
         ArrayList<String> strings15 = new ArrayList<>();
-
+        ArrayList<String> strings16 = new ArrayList<>();
+        ArrayList<String> strings17 = new ArrayList<>();
+        ArrayList<String> strings18 = new ArrayList<>();
+        ArrayList<String> strings19 = new ArrayList<>();
+        ArrayList<String> strings20 = new ArrayList<>();
+        ArrayList<String> strings21 = new ArrayList<>();
         // advId = 1; bottleId = 11; equipmentId = 111; foodId = 1111;
         strings1.add("1");
         strings1.add("1");
         strings1.add("advName");
         inputInfo.add(strings1);
+
+        strings20.add("1");
+        strings20.add("2");
+        strings20.add("advName2");
+        inputInfo.add(strings20);
+
+        strings21.add("1");
+        strings21.add("3");
+        strings21.add("advName3");
+        inputInfo.add(strings21);
 
         strings2.add("2");
         strings2.add("1");
@@ -87,7 +102,6 @@ public class MainTest {
         strings7.add("1");
         strings7.add("111");
         inputInfo.add(strings7);
-
 
         strings8.add("7");
         strings8.add("1");
@@ -133,7 +147,30 @@ public class MainTest {
         strings15.add("foodName");
         inputInfo.add(strings15);
 
-        Main.operation(16, inputInfo);
+        strings16.add("14");
+        strings16.add("3");
+        strings16.add("3");
+        strings16.add("advName");
+        strings16.add("advName2");
+        strings16.add("advName3");
+        strings16.add("2022/09-advName-bottleName");
+        strings16.add("2022/09-advName@#-equipmentName");
+        strings16.add("2022/09-advName@advName2-equipmentName");
+        inputInfo.add(strings16);
+
+        strings17.add("15");
+        strings17.add("2022/09");
+        inputInfo.add(strings17);
+
+        strings18.add("16");
+        strings18.add("1");
+        inputInfo.add(strings18);
+
+        strings19.add("17");
+        strings19.add("1");
+        inputInfo.add(strings19);
+
+        Main.operation(22, inputInfo);
     }
 
     @Test

@@ -37,6 +37,18 @@ public class Backpack {
         }
     }
 
+    public boolean hasEquipment(String equipmentName) {
+        if (equipmentTreeMap.isEmpty()) {
+            return false;
+        }
+        for (Integer key : equipmentTreeMap.keySet()) {
+            if (equipmentTreeMap.get(key).getName().equals(equipmentName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void carryBottle(Bottle bottle) {
         bottleTreeMap.put(bottle.getId(), bottle);
     }
@@ -172,5 +184,14 @@ public class Backpack {
         if (foodTreeMap.containsKey(foodId)) {
             foodTreeMap.remove(foodId);
         }
+    }
+
+    public int getEquipmentStar(String equipmentName) {
+        for (Integer key: equipmentTreeMap.keySet()) {
+            if (equipmentTreeMap.get(key).getName().equals(equipmentName)) {
+                return equipmentTreeMap.get(key).getStar();
+            }
+        }
+        return -1;
     }
 }
