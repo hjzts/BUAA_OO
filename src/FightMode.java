@@ -52,7 +52,7 @@ public class FightMode {
     public void beAttackedLogMapInsert(String outputLog) {
         String[] strings = outputLog.split(" ");
         String beAttackedName = strings[3];
-        if(Main.getAdventurer(beAttackedName) == null) {
+        if (Main.getAdventurer(beAttackedName) == null) {
             return;
         }
         int beAttackedId = Main.getAdventurer(beAttackedName).getId();
@@ -90,7 +90,8 @@ public class FightMode {
         Adventurer adventurerBeAttacked = Main.getAdventurer(input.get(2));
         int attackId = adventurerAttack.getId();
         int beAttackedId = adventurerBeAttacked.getId();
-        if (!adventurerInFightModeMap.containsKey(attackId) || !adventurerInFightModeMap.containsKey(beAttackedId)) {
+        if (!adventurerInFightModeMap.containsKey(attackId) ||
+                !adventurerInFightModeMap.containsKey(beAttackedId)) {
             System.out.println("Fight log error");
             return;
         }
@@ -105,7 +106,8 @@ public class FightMode {
             System.out.println("Fight log error");
             return;
         }
-        String outputLog = input.get(0) + " " + input.get(1) + " " + "attacked" + " " + input.get(2) + " " + "with" + " " + input.get(3);
+        String outputLog = input.get(0) + " " + input.get(1) + " " + "attacked"
+                + " " + input.get(2) + " " + "with" + " " + input.get(3);
         timeLogTreeInsert(outputLog);
         attackLogMapInsert(outputLog);
         beAttackedLogMapInsert(outputLog);
@@ -149,7 +151,7 @@ public class FightMode {
     }
 
     public void queryTimeLog(String time) {
-        if(fightLogTimeTree.containsKey(time)) {
+        if (fightLogTimeTree.containsKey(time)) {
             ArrayList<String> temp = fightLogTimeTree.get(time);
             for (String s : temp) {
                 System.out.println(s);

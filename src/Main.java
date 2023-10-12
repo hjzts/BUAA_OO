@@ -5,8 +5,6 @@
  * @author 86152
  */
 
-import com.sun.javafx.UnmodifiableArrayList;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,6 +18,7 @@ public class Main {
     private static FightMode fightMode = new FightMode();
 
     private static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         int n = getOperationLine();
         ArrayList<ArrayList<String>> inputInfo = getInputInfo(n);
@@ -43,10 +42,10 @@ public class Main {
                     operation.add(nextLine1.trim());
                 }
             }
-             // System.out.println(operation);
+            // System.out.println(operation);
             inputInfo.add(operation); // 将指令分割后的各个部分存进容器中
         }
-         // System.out.println(inputInfo);
+        // System.out.println(inputInfo);
         return inputInfo;
     }
 
@@ -126,11 +125,12 @@ public class Main {
                     // query adventurer attack log
                     queryAttackLog(strings);
                     break;
-                case "17":
-                    // query adventurer be attacked log
-                    queryBeAttackedLog(strings);
-                    break;
+                // case "17":
+                //      query adventurer be attacked log
+                //      queryBeAttackedLog(strings);
+                //      break;
                 default:
+                    queryBeAttackedLog(strings);
                     break;
             }
         }
@@ -304,13 +304,16 @@ public class Main {
             Matcher matcher2 = pattern2.matcher(strings.get(i));
             Matcher matcher3 = pattern3.matcher(strings.get(i));
             if (matcher3.find()) {
-                ArrayList<String> attackAoe = new ArrayList<>(Arrays.asList(matcher3.group().split("(@#)?-")));
+                ArrayList<String> attackAoe =
+                        new ArrayList<>(Arrays.asList(matcher3.group().split("(@#)?-")));
                 fightMode.attackAoe(attackAoe);
             } else if (matcher2.find()) {
-                ArrayList<String> attackOne = new ArrayList<>(Arrays.asList(matcher2.group().split("@|-")));
+                ArrayList<String> attackOne =
+                        new ArrayList<>(Arrays.asList(matcher2.group().split("@|-")));
                 fightMode.attackOne(attackOne);
             } else if (matcher1.find()) {
-                ArrayList<String> useBottleLog = new ArrayList<>(Arrays.asList(matcher1.group().split("-")));
+                ArrayList<String> useBottleLog =
+                        new ArrayList<>(Arrays.asList(matcher1.group().split("-")));
                 int adventurerId = getAdventurer(useBottleLog.get(1)).getId();
                 fightMode.useBottle(useBottleLog, adventurerId);
             } else {
@@ -347,7 +350,7 @@ public class Main {
     public static Adventurer getAdventurer(int id) {
         if (adventurersMap.containsKey(id)) {
             return adventurersMap.get(id);
-        }else {
+        } else {
             return null;
         }
     }
