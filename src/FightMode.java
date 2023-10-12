@@ -115,7 +115,8 @@ public class FightMode {
                 int hitPoint = adventurerBeAttacked.getHitPoint();
                 System.out.println(beAttackedId + " " + hitPoint);
 
-                String outputLog = input.get(0) + " " + input.get(1) + " " + "attacked" + " " + input.get(2) + " " + "with" + " " + input.get(3);
+                String outputLog = input.get(0) + " " + input.get(1) + " " + "attacked"
+                        + " " + input.get(2) + " " + "with" + " " + input.get(3);
                 timeLogTreeInsert(outputLog);
                 attackLogMapInsert(outputLog);
                 beAttackedLogMapInsert(outputLog);
@@ -153,7 +154,8 @@ public class FightMode {
                         adventurerBeAttacked.decreaseHitPoint(attackerLevel * equipmentStar);
                         int hitPoint = adventurerBeAttacked.getHitPoint();
                         System.out.print(hitPoint + " ");
-                        outputLog = input.get(0) + " " + input.get(1) + " " + "AOE-attacked" + " " + "with" + " " + input.get(2);
+                        outputLog = input.get(0) + " " + input.get(1) + " " + "AOE-attacked"
+                                + " " + "with" + " " + input.get(2);
                         attackLogMapInsert(outputLog);
                         beAttackedLogMapAoeInsert(outputLog,key);
                     }

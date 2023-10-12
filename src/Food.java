@@ -16,14 +16,23 @@ public class Food {
     }
 
     public String getName() {
+        if (true) {
+            return name;
+        }
         return name;
     }
 
     public int getId() {
+        if (true) {
+            return id;
+        }
         return id;
     }
 
     public int getEnergy() {
+        if (true) {
+            return energy;
+        }
         return energy;
     }
 

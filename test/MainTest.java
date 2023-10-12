@@ -162,15 +162,30 @@ public class MainTest {
         strings17.add("2022/09");
         inputInfo.add(strings17);
 
+        strings17.clear();
+        strings17.add("15");
+        strings17.add("2022/11");
+        inputInfo.add(strings17);
+
         strings18.add("16");
         strings18.add("1");
+        inputInfo.add(strings18);
+
+        strings18.clear();
+        strings18.add("16");
+        strings18.add("2");
         inputInfo.add(strings18);
 
         strings19.add("17");
         strings19.add("1");
         inputInfo.add(strings19);
 
-        Main.operation(22, inputInfo);
+        strings19.clear();
+        strings19.add("17");
+        strings19.add("2");
+        inputInfo.add(strings19);
+
+        Main.operation(25, inputInfo);
     }
 
     @Test
