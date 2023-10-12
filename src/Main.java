@@ -177,6 +177,10 @@ public class Main {
     public static void equipmentDelete(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
         int equipmentId = Integer.parseInt(strings.get(2));
+        if(adventurersMap.get(adventurerId) == null){
+            System.out.println("有脏东西");
+            return;
+        }
         String equipmentName = adventurersMap.get(adventurerId).getEquipmentName(equipmentId);
         adventurersMap.get(adventurerId).deleteEquipment(equipmentId);
         int equipmentCount = adventurersMap.get(adventurerId).getEquipmentCount();
