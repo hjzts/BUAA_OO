@@ -36,7 +36,7 @@ public class FightMode {
     public void attackLogMapInsert(String outputLog) {
         String[] strings = outputLog.trim().split(" ");
         String attackName = strings[1];
-        int attackId = Main.getAdventurer(attackName).getId();
+        int attackId = Manager.getAdventurer(attackName).getId();
         if (attackLogMap.containsKey(attackId)) {
             ArrayList<String> temp = attackLogMap.get(attackId);
             temp.add(outputLog);
@@ -51,10 +51,10 @@ public class FightMode {
     public void beAttackedLogMapInsert(String outputLog) {
         String[] strings = outputLog.trim().split(" ");
         String beAttackedName = strings[3];
-        if (Main.getAdventurer(beAttackedName) == null) {
+        if (Manager.getAdventurer(beAttackedName) == null) {
             return;
         } else {
-            int beAttackedId = Main.getAdventurer(beAttackedName).getId();
+            int beAttackedId = Manager.getAdventurer(beAttackedName).getId();
             if (beAttackedLogMap.containsKey(beAttackedId)) {
                 ArrayList<String> temp = beAttackedLogMap.get(beAttackedId);
                 temp.add(outputLog);
@@ -80,7 +80,7 @@ public class FightMode {
     }
 
     public void useBottle(ArrayList<String> input, int adventurerId) {
-        if (!adventurerInFightModeList.contains(Main.getAdventurer(adventurerId))) {
+        if (!adventurerInFightModeList.contains(Manager.getAdventurer(adventurerId))) {
             System.out.println("Fight log error");
             return;
         }
@@ -88,7 +88,7 @@ public class FightMode {
         strings.add("12");
         strings.add(Integer.toString(adventurerId));
         strings.add(input.get(2));
-        boolean useSuccess = Main.bottleUse(strings, 1);
+        boolean useSuccess = Manager.bottleUse(strings, 1);
         if (useSuccess) {
             String timeLog = input.get(0) + " " + input.get(1) + " " + "used" + " " + input.get(2);
             timeLogTreeInsert(timeLog);
@@ -98,12 +98,12 @@ public class FightMode {
     }
 
     public void attackOne(ArrayList<String> input) {
-        Adventurer adventurerAttack = Main.getAdventurer(input.get(1));
-        Adventurer adventurerBeAttacked = Main.getAdventurer(input.get(2));
+        Adventurer adventurerAttack = Manager.getAdventurer(input.get(1));
+        Adventurer adventurerBeAttacked = Manager.getAdventurer(input.get(2));
         int attackId = adventurerAttack.getId();
         int beAttackedId = adventurerBeAttacked.getId();
-        if (!adventurerInFightModeList.contains(Main.getAdventurer(attackId)) ||
-                !adventurerInFightModeList.contains(Main.getAdventurer(beAttackedId))) {
+        if (!adventurerInFightModeList.contains(Manager.getAdventurer(attackId)) ||
+                !adventurerInFightModeList.contains(Manager.getAdventurer(beAttackedId))) {
             System.out.println("Fight log error");
             return;
         } else {
@@ -129,9 +129,9 @@ public class FightMode {
     }
 
     public void attackAoe(ArrayList<String> input) {
-        Adventurer adventurerAttack = Main.getAdventurer(input.get(1));
+        Adventurer adventurerAttack = Manager.getAdventurer(input.get(1));
         int attackId = adventurerAttack.getId();
-        if (!adventurerInFightModeList.contains(Main.getAdventurer(attackId))) {
+        if (!adventurerInFightModeList.contains(Manager.getAdventurer(attackId))) {
             System.out.println("Fight log error");
             return;
         } else {

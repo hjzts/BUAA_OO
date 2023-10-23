@@ -1998,7 +1998,7 @@ public class MainTest {
         strings253.add("443198");
         inputInfo.add(strings253);
 
-        Main.operation(n, inputInfo);
+        Manager.operation(n, inputInfo);
     }
 
     @Test
