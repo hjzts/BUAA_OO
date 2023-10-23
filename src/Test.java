@@ -7,7 +7,7 @@ import java.util.HashMap;
  * @author hugo
  */
 public class Test {
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         CommandUtil<Integer> commandUtil = new CommandUtil<>(new HashMap<>(27));
         commandUtil.add(1,()->System.out.println("apple"))
                 .add(2,()->System.out.println("banana"))
