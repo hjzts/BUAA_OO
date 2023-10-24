@@ -111,7 +111,19 @@ public class FightMode {
             if (attackSuccess) {
                 int attackerLevel = adventurerAttack.getLevel();
                 int equipmentStar = adventurerAttack.getEquipmentCarriedStar(input.get(3));
-                adventurerBeAttacked.decreaseHitPoint(attackerLevel * equipmentStar);
+                Equipment equipment = adventurerAttack.getEquipmentCarried(input.get(3));
+                int decreaseHitPoint = 0;
+                if (equipment instanceof RegularEquipment) {
+                    decreaseHitPoint = attackerLevel * equipmentStar;
+                } else if (equipment instanceof CirtEquipment) {
+                    int critical = equipment.getCritical();
+                    decreaseHitPoint = attackerLevel * equipmentStar + critical;
+                } else if (equipment instanceof EpicEquipment) {
+                    double ratio = equipment.getRatio();
+                    int adventurerBeAttackedHitPoint = adventurerBeAttacked.getHitPoint();
+                    decreaseHitPoint = (int) (adventurerBeAttackedHitPoint * ratio);
+                }
+                adventurerBeAttacked.decreaseHitPoint(decreaseHitPoint);
                 int hitPoint = adventurerBeAttacked.getHitPoint();
                 System.out.println(beAttackedId + " " + hitPoint);
 
@@ -162,8 +174,7 @@ public class FightMode {
                 attackLogMapInsert(outputLog);
                 timeLogTreeInsert(outputLog);
                 System.out.println();
-            }
-            else {
+            } else {
                 System.out.println("Fight log error");
                 return;
             }

@@ -14,7 +14,9 @@ public class MyScanner {
     public static int getOperationLine() {
         return Integer.parseInt(scanner.nextLine().trim()); // 读取行数
     }
+
     private static int n = getOperationLine();
+
     public static ArrayList<ArrayList<String>> getInputInfo() {
         ArrayList<ArrayList<String>> inputInfo = new ArrayList<>(); // 解析后的输入将会存进该容器中, 类似于c语言的二维数组
         for (int i = 0; i < n; ++i) {

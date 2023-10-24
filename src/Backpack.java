@@ -8,16 +8,21 @@
 import java.util.TreeMap;
 
 public class Backpack {
+
+    private int adventurerId;
     private TreeMap<Integer, Bottle> bottleTreeMap = new TreeMap<>();
     private TreeMap<Integer, Equipment> equipmentTreeMap = new TreeMap<>();
     private TreeMap<Integer, Food> foodTreeMap = new TreeMap<>();
+
+    public Backpack(int adventurerId) {
+        this.adventurerId = adventurerId;
+    }
 
     public void carryEquipment(Equipment equipment) {
         // 遍历，如果有同名的先把那个删除
         if (equipmentTreeMap.isEmpty()) {
             equipmentTreeMap.put(equipment.getId(), equipment);
-        }
-        else {
+        } else {
             for (Integer key : equipmentTreeMap.keySet()) {
                 if (equipmentTreeMap.get(key) == null) {
                     break;
@@ -49,6 +54,24 @@ public class Backpack {
         return false;
     }
 
+    public Equipment getEquipment(String equipmentName) {
+        boolean flag = false;
+        Equipment equipment = null;
+        for (Integer key : equipmentTreeMap.keySet()) {
+            if (equipmentTreeMap.get(key).getName().equals(equipmentName)) {
+                if (!flag) {
+                    equipment = equipmentTreeMap.get(key);
+                    flag = true;
+                } else if (equipment.getId() < equipmentTreeMap.get(key).getId()) {
+                    equipment = equipmentTreeMap.get(key);
+                } else {
+                    continue;
+                }
+            }
+        }
+        return equipment;
+    }
+
     public void carryBottle(Bottle bottle) {
         bottleTreeMap.put(bottle.getId(), bottle);
     }
@@ -64,19 +87,19 @@ public class Backpack {
 
     public int getSameNameBottleNum(String bottleName) {
         int num = 0;
-        for (Integer key: bottleTreeMap.keySet()) {
+        for (Integer key : bottleTreeMap.keySet()) {
             if (bottleTreeMap.get(key).getName().equals(bottleName)) {
                 num++;
             }
         }
         return num;
     }
-    
+
     public boolean hasBottle(String bottleName) {
         if (bottleTreeMap.isEmpty()) {
             return false;
         }
-        for (Integer key: bottleTreeMap.keySet()) {
+        for (Integer key : bottleTreeMap.keySet()) {
             if (bottleTreeMap.get(key).getName().equals(bottleName)) {
                 return true;
             }
@@ -87,8 +110,7 @@ public class Backpack {
     public int getBottleId(String bottleName) {
         if (bottleTreeMap.isEmpty()) {
             return 0;
-        }
-        else {
+        } else {
             boolean flag = false;
             int bottleId = 0;
             for (Integer key : bottleTreeMap.keySet()) {
@@ -96,11 +118,9 @@ public class Backpack {
                     if (!flag) {
                         bottleId = key;
                         flag = true;
-                    }
-                    else if (bottleId > key) {
+                    } else if (bottleId > key) {
                         bottleId = key;
-                    }
-                    else {
+                    } else {
                         continue;
                     }
                 }
@@ -113,27 +133,36 @@ public class Backpack {
         int capacity = 0;
         int bottleId = 0;
         boolean flag = false;
-        for (Integer key: bottleTreeMap.keySet()) {
+        for (Integer key : bottleTreeMap.keySet()) {
             if (bottleTreeMap.get(key).getName().equals(bottleName)) {
                 if (!flag) {
                     capacity = bottleTreeMap.get(key).getCapacity();
                     bottleId = key;
                     flag = true;
-                }
-                else if (bottleId > key) {
+                } else if (bottleId > key) {
                     capacity = bottleTreeMap.get(key).getCapacity();
                     bottleId = key;
-                }
-                else {
+                } else {
                     continue;
                 }
             }
         }
+
         if (capacity == 0) {
             bottleTreeMap.remove(bottleId);
-        }
-        else {
+        } else {
+            Bottle bottle = bottleTreeMap.get(bottleId);
             bottleTreeMap.get(bottleId).resetCapacity();
+            if (bottle instanceof RegularBottle) {
+                capacity = capacity;
+            } else if (bottle instanceof ReinforcedBottle) {
+                double ratio = bottle.getRatio();
+                capacity = (int) (capacity * (1 + ratio));
+            } else if (bottle instanceof RecoverBottle) {
+                double ratio = bottle.getRatio();
+                int hitPoint = Manager.getAdventurer(adventurerId).getHitPoint();
+                capacity = (int) (ratio * hitPoint);
+            }
         }
         return capacity;
     }
@@ -170,7 +199,7 @@ public class Backpack {
     }
 
     public int useFood(String foodName) {
-        for (Integer key: foodTreeMap.keySet()) {
+        for (Integer key : foodTreeMap.keySet()) {
             if (foodTreeMap.get(key).getName().equals(foodName)) {
                 int energy = foodTreeMap.get(key).getEnergy();
                 foodTreeMap.remove(key);
@@ -187,7 +216,7 @@ public class Backpack {
     }
 
     public int getEquipmentStar(String equipmentName) {
-        for (Integer key: equipmentTreeMap.keySet()) {
+        for (Integer key : equipmentTreeMap.keySet()) {
             if (equipmentTreeMap.get(key).getName().equals(equipmentName)) {
                 return equipmentTreeMap.get(key).getStar();
             }

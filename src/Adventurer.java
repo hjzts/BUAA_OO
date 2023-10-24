@@ -6,16 +6,17 @@
 
 import java.util.HashMap;
 
-public class Adventurer {
+public class Adventurer implements Commodity {
     private int id;
     private String name;
     private int hitPoint;
     private int level;
+    // private HashMap<Integer, Commodity> commodityMap = new HashMap<>();
     private HashMap<Integer, Bottle> bottlesMap = new HashMap<>();
     private HashMap<Integer, Equipment> equipmentsMap = new HashMap<>();
     private HashMap<Integer, Food> foodMap = new HashMap<>();
-
-    private Backpack backpack = new Backpack();
+    private HashMap<Integer, Adventurer> hireAdventurerMap = new HashMap<>();
+    private Backpack backpack = new Backpack(this.id);
 
     public Adventurer(int id, String name) {
         this.id = id;
@@ -59,10 +60,12 @@ public class Adventurer {
     //bottle
     public void addBottle(Bottle bottle) {
         bottlesMap.put(bottle.getId(), bottle);
+        // commodityMap.put(bottle.getId(),bottle);
     }
 
     public void deleteBottle(int bottleId) {
         bottlesMap.remove(bottleId);
+        // commodityMap.remove(bottleId);
         backpack.deleteBottle(bottleId);
     }
 
@@ -80,15 +83,16 @@ public class Adventurer {
     // equipment
     public void addEquipment(Equipment equipment) {
         equipmentsMap.put(equipment.getId(), equipment);
+        // commodityMap.put(equipment.getId(), equipment);
     }
 
     public void deleteEquipment(int equipmentId) {
         equipmentsMap.remove(equipmentId);
+        // commodityMap.remove(equipmentId);
         backpack.deleteEquipment(equipmentId);
     }
 
     public void upgradeEquipment(int equipmentId) {
-
         equipmentsMap.get(equipmentId).upgrade();
     }
 
@@ -106,6 +110,10 @@ public class Adventurer {
 
     public int getEquipmentCarriedStar(String equipmentName) {
         return backpack.getEquipmentStar(equipmentName);
+    }
+
+    public Equipment getEquipmentCarried(String equipmentName) {
+        return backpack.getEquipment(equipmentName);
     }
 
     public boolean hasEquipmentInBackpack(String equipmentName) {
@@ -139,7 +147,7 @@ public class Adventurer {
     }
 
     public void carryBottle(int bottleId) {
-        if (! bottlesMap.containsKey(bottleId)) {
+        if (!bottlesMap.containsKey(bottleId)) {
             return;
         }
         String bottleName = bottlesMap.get(bottleId).getName();
@@ -156,7 +164,7 @@ public class Adventurer {
     }
 
     public void carryFood(int foodId) {
-        if (! hasFoodInBackpack(foodId)) {
+        if (!hasFoodInBackpack(foodId)) {
             backpack.carryFood(foodMap.get(foodId));
         }
     }
@@ -196,4 +204,87 @@ public class Adventurer {
         return energy;
     }
 
+    public void hireAdventurer(int adventurerHiredId) {
+        if (!hireAdventurerMap.containsKey(adventurerHiredId)) {
+            Adventurer adventurerHired = Manager.getAdventurer(adventurerHiredId);
+            hireAdventurerMap.put(adventurerHiredId, adventurerHired);
+        }
+    }
+
+    public int getCommodityNum() {
+        return bottlesMap.size() + equipmentsMap.size() + foodMap.size() + hireAdventurerMap.size();
+    }
+
+    public int getCommodityValue() {
+        int value = 0;
+        for (Bottle bottle : bottlesMap.values()) {
+            value += bottle.getCommodityValue();
+        }
+        for (Equipment equipment : equipmentsMap.values()) {
+            value += equipment.getCommodityValue();
+        }
+        for (Food food : foodMap.values()) {
+            value += food.getCommodityValue();
+        }
+        for (Adventurer adventurer : hireAdventurerMap.values()) {
+            value += adventurer.getCommodityValue();
+        }
+        return value;
+    }
+
+    public int getMaxCommodityValue() {
+        int value = 0;
+        for (Bottle bottle : bottlesMap.values()) {
+            if (value < bottle.getCommodityValue()) {
+                value = bottle.getCommodityValue();
+            }
+        }
+        for (Equipment equipment : equipmentsMap.values()) {
+            if (value < equipment.getCommodityValue()) {
+                value = equipment.getCommodityValue();
+            }
+        }
+        for (Food food : foodMap.values()) {
+            if (value < food.getCommodityValue()) {
+                value = food.getCommodityValue();
+            }
+        }
+        for (Adventurer adventurer : hireAdventurerMap.values()) {
+            if (value < adventurer.getCommodityValue()) {
+                value = adventurer.getCommodityValue();
+            }
+        }
+        return value;
+    }
+
+    public void getCommodityClass(int commodityId) {
+        for (Integer key : bottlesMap.keySet()) {
+            if (key == commodityId) {
+                System.out.println("Commodity whose id is "
+                        + commodityId + " belongs to " + bottlesMap.get(key).getType());
+                return;
+            }
+        }
+        for (Integer key : equipmentsMap.keySet()) {
+            if (key == commodityId) {
+                System.out.println("Commodity whose id is "
+                        + commodityId + " belongs to " + equipmentsMap.get(key).getType());
+                return;
+            }
+        }
+        for (Integer key : foodMap.keySet()) {
+            if (key == commodityId) {
+                System.out.println("Commodity whose id is "
+                        + commodityId + " belongs to " + foodMap.get(key).getType());
+                return;
+            }
+        }
+        for (Integer key : hireAdventurerMap.keySet()) {
+            if (key == commodityId) {
+                System.out.println("Commodity whose id is "
+                        + commodityId + " belongs to " + "Adventurer");
+                return;
+            }
+        }
+    }
 }
