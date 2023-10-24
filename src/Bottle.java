@@ -40,6 +40,11 @@ public class Bottle implements Commodity {
         int bottleId = Integer.parseInt(strings.get(2));
         String bottleName = strings.get(3);
         int bottleCapacity = Integer.parseInt(strings.get(4));
+        if (strings.size() <= 5) {
+            int price = 0;
+            Bottle regularBottle = new RegularBottle(bottleId, bottleName, bottleCapacity, price);
+            return regularBottle;
+        }
         int price = Integer.parseInt(strings.get(5));
         String bottleType = strings.get(6);
         if (bottleType.equals("RegularBottle")) {

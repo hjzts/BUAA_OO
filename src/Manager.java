@@ -198,6 +198,12 @@ public class Manager {
         int foodId = Integer.parseInt(strings.get(2));
         String foodName = strings.get(3);
         int foodEnergy = Integer.parseInt(strings.get(4));
+        if (strings.size() <= 5) {
+            int price = 0;
+            Food food = new Food(foodId, foodName, foodEnergy, price);
+            adventurersMap.get(adventurerId).addFood(food);
+            return;
+        }
         int price = Integer.parseInt(strings.get(5));
         Food food = new Food(foodId, foodName, foodEnergy, price);
         adventurersMap.get(adventurerId).addFood(food);

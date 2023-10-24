@@ -40,6 +40,12 @@ public class Equipment implements Commodity {
         int equipmentId = Integer.parseInt(strings.get(2));
         String equipmentName = strings.get(3);
         int equipmentStar = Integer.parseInt(strings.get(4));
+        if (strings.size() <= 5) {
+            int price = 0;
+            Equipment regularEquipment =
+                    new RegularEquipment(equipmentId, equipmentName, equipmentStar, price);
+            return regularEquipment;
+        }
         int price = Integer.parseInt(strings.get(5));
         String equipmentType = strings.get(6);
         if (equipmentType.equals("RegularEquipment")) {
