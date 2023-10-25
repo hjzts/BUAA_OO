@@ -11,9 +11,9 @@ public class Bottle implements Commodity {
     private String name;
     private int capacity;
 
-    private int price;
+    private long price;
 
-    public Bottle(int id, String name, int capacity, int price) {
+    public Bottle(int id, String name, int capacity, long price) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;
@@ -41,11 +41,11 @@ public class Bottle implements Commodity {
         String bottleName = strings.get(3);
         int bottleCapacity = Integer.parseInt(strings.get(4));
         if (strings.size() <= 5) {
-            int price = 0;
+            long price = 0;
             Bottle regularBottle = new RegularBottle(bottleId, bottleName, bottleCapacity, price);
             return regularBottle;
         }
-        int price = Integer.parseInt(strings.get(5));
+        long price = Long.parseLong(strings.get(5));
         String bottleType = strings.get(6);
         if (bottleType.equals("RegularBottle")) {
             Bottle regularBottle = new RegularBottle(bottleId, bottleName, bottleCapacity, price);
@@ -68,7 +68,7 @@ public class Bottle implements Commodity {
         return 1;
     }
 
-    public int getCommodityValue() {
+    public long getCommodityValue() {
         return price;
     }
 

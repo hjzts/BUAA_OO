@@ -7,7 +7,7 @@
 public class CritEquipment extends Equipment {
     private int critical;
 
-    public CritEquipment(int id, String name, int star, int price, int critical) {
+    public CritEquipment(int id, String name, int star, long price, int critical) {
         super(id, name, star, price);
         this.critical = critical;
     }

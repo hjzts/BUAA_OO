@@ -9,14 +9,9 @@ import java.util.TreeMap;
 
 public class Backpack {
 
-    private int adventurerId;
     private TreeMap<Integer, Bottle> bottleTreeMap = new TreeMap<>();
     private TreeMap<Integer, Equipment> equipmentTreeMap = new TreeMap<>();
     private TreeMap<Integer, Food> foodTreeMap = new TreeMap<>();
-
-    public Backpack(int adventurerId) {
-        this.adventurerId = adventurerId;
-    }
 
     public void carryEquipment(Equipment equipment) {
         // 遍历，如果有同名的先把那个删除
@@ -129,7 +124,7 @@ public class Backpack {
         }
     }
 
-    public int useBottle(String bottleName) {
+    public int useBottle(String bottleName, int hitPoint) {
         int capacity = 0;
         int bottleId = 0;
         boolean flag = false;
@@ -160,10 +155,6 @@ public class Backpack {
                 capacity = (int) (capacity * (1 + ratio));
             } else if (bottle instanceof RecoverBottle) {
                 double ratio = bottle.getRatio();
-                if (Manager.getAdventurer(adventurerId) == null) {
-                    return 0;
-                }
-                int hitPoint = Manager.getAdventurer(adventurerId).getHitPoint();
                 capacity = (int) (ratio * hitPoint);
             }
         }

@@ -163,7 +163,19 @@ public class FightMode {
                         if (adventurerBeAttacked == null) {
                             continue;
                         }
-                        adventurerBeAttacked.decreaseHitPoint(attackerLevel * equipmentStar);
+                        Equipment equipment = adventurerAttack.getEquipmentCarried(input.get(2));
+                        int decreaseHitPoint = 0;
+                        if (equipment instanceof RegularEquipment) {
+                            decreaseHitPoint = attackerLevel * equipmentStar;
+                        } else if (equipment instanceof CritEquipment) {
+                            int critical = equipment.getCritical();
+                            decreaseHitPoint = attackerLevel * equipmentStar + critical;
+                        } else if (equipment instanceof EpicEquipment) {
+                            double ratio = equipment.getRatio();
+                            int adventurerBeAttackedHitPoint = adventurerBeAttacked.getHitPoint();
+                            decreaseHitPoint = (int) (adventurerBeAttackedHitPoint * ratio);
+                        }
+                        adventurerBeAttacked.decreaseHitPoint(decreaseHitPoint);
                         int hitPoint = adventurerBeAttacked.getHitPoint();
                         System.out.print(hitPoint + " ");
                         outputLog = input.get(0) + " " + input.get(1) + " " + "AOE-attacked"

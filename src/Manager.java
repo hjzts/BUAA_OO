@@ -199,12 +199,12 @@ public class Manager {
         String foodName = strings.get(3);
         int foodEnergy = Integer.parseInt(strings.get(4));
         if (strings.size() <= 5) {
-            int price = 0;
+            long price = 0;
             Food food = new Food(foodId, foodName, foodEnergy, price);
             adventurersMap.get(adventurerId).addFood(food);
             return;
         }
-        int price = Integer.parseInt(strings.get(5));
+        long price = Long.parseLong(strings.get(5));
         Food food = new Food(foodId, foodName, foodEnergy, price);
         adventurersMap.get(adventurerId).addFood(food);
     }
@@ -353,7 +353,7 @@ public class Manager {
     public static void adventurerCommodityGet(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
         int commodityNum = adventurersMap.get(adventurerId).getCommodityNum();
-        int commodityValue = adventurersMap.get(adventurerId).getCommodityValue();
+        long commodityValue = adventurersMap.get(adventurerId).getCommodityValue();
         System.out.println(commodityNum + " " + commodityValue);
     }
 
@@ -363,7 +363,7 @@ public class Manager {
             System.out.println(0);
             return;
         }
-        int maxCommodityValue = adventurersMap.get(adventurerId).getMaxCommodityValue();
+        long maxCommodityValue = adventurersMap.get(adventurerId).getMaxCommodityValue();
         System.out.println(maxCommodityValue);
     }
 

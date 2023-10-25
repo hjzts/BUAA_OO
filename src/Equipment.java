@@ -11,9 +11,9 @@ public class Equipment implements Commodity {
     private String name;
     private int star;
 
-    private int price;
+    private long price;
 
-    public Equipment(int id, String name, int star, int price) {
+    public Equipment(int id, String name, int star, long price) {
         this.id = id;
         this.name = name;
         this.star = star;
@@ -41,12 +41,12 @@ public class Equipment implements Commodity {
         String equipmentName = strings.get(3);
         int equipmentStar = Integer.parseInt(strings.get(4));
         if (strings.size() <= 5) {
-            int price = 0;
+            long price = 0;
             Equipment regularEquipment =
                     new RegularEquipment(equipmentId, equipmentName, equipmentStar, price);
             return regularEquipment;
         }
-        int price = Integer.parseInt(strings.get(5));
+        long price = Long.parseLong(strings.get(5));
         String equipmentType = strings.get(6);
         if ("RegularEquipment".equals(equipmentType)) {
             Equipment regularEquipment =
@@ -70,7 +70,7 @@ public class Equipment implements Commodity {
         return 1;
     }
 
-    public int getCommodityValue() {
+    public long getCommodityValue() {
         return price;
     }
 

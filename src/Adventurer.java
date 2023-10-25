@@ -16,7 +16,7 @@ public class Adventurer implements Commodity {
     private HashMap<Integer, Equipment> equipmentsMap = new HashMap<>();
     private HashMap<Integer, Food> foodMap = new HashMap<>();
     private HashMap<Integer, Adventurer> hireAdventurerMap = new HashMap<>();
-    private Backpack backpack = new Backpack(this.id);
+    private Backpack backpack = new Backpack();
 
     public Adventurer(int id, String name) {
         this.id = id;
@@ -183,7 +183,7 @@ public class Adventurer implements Commodity {
 
     public int useBottle(String bottleName) {
         int bottleId = getBottleId(bottleName);
-        int capacity = backpack.useBottle(bottleName);
+        int capacity = backpack.useBottle(bottleName,hitPoint);
         if (capacity == 0) {
             bottlesMap.remove(bottleId);
         }
@@ -215,8 +215,8 @@ public class Adventurer implements Commodity {
         return bottlesMap.size() + equipmentsMap.size() + foodMap.size() + hireAdventurerMap.size();
     }
 
-    public int getCommodityValue() {
-        int value = 0;
+    public long getCommodityValue() {
+        long value = 0;
         for (Bottle bottle : bottlesMap.values()) {
             value += bottle.getCommodityValue();
         }
@@ -232,8 +232,8 @@ public class Adventurer implements Commodity {
         return value;
     }
 
-    public int getMaxCommodityValue() {
-        int value = 0;
+    public long getMaxCommodityValue() {
+        long value = 0;
         for (Bottle bottle : bottlesMap.values()) {
             if (value < bottle.getCommodityValue()) {
                 value = bottle.getCommodityValue();

@@ -9,9 +9,9 @@ public class Food implements Commodity {
     private String name;
     private int energy;
 
-    private int price;
+    private long price;
 
-    public Food(int id, String name, int energy, int price) {
+    public Food(int id, String name, int energy, long price) {
         this.id = id;
         this.name = name;
         this.energy = energy;
@@ -34,7 +34,7 @@ public class Food implements Commodity {
         return 1;
     }
 
-    public int getCommodityValue() {
+    public long getCommodityValue() {
         return price;
     }
 
