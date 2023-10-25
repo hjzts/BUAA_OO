@@ -6,5 +6,6 @@ public class RegularEquipmentTest {
 
     @Test
     public void getType() {
+
     }
 }

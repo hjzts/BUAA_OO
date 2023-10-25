@@ -160,6 +160,9 @@ public class Backpack {
                 capacity = (int) (capacity * (1 + ratio));
             } else if (bottle instanceof RecoverBottle) {
                 double ratio = bottle.getRatio();
+                if (Manager.getAdventurer(adventurerId) == null) {
+                    return 0;
+                }
                 int hitPoint = Manager.getAdventurer(adventurerId).getHitPoint();
                 capacity = (int) (ratio * hitPoint);
             }

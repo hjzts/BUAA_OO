@@ -115,7 +115,7 @@ public class FightMode {
                 int decreaseHitPoint = 0;
                 if (equipment instanceof RegularEquipment) {
                     decreaseHitPoint = attackerLevel * equipmentStar;
-                } else if (equipment instanceof CirtEquipment) {
+                } else if (equipment instanceof CritEquipment) {
                     int critical = equipment.getCritical();
                     decreaseHitPoint = attackerLevel * equipmentStar + critical;
                 } else if (equipment instanceof EpicEquipment) {

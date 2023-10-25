@@ -4,16 +4,16 @@
  *
  * @author hugo
  */
-public class CirtEquipment extends Equipment {
+public class CritEquipment extends Equipment {
     private int critical;
 
-    public CirtEquipment(int id, String name, int star, int price, int critical) {
+    public CritEquipment(int id, String name, int star, int price, int critical) {
         super(id, name, star, price);
         this.critical = critical;
     }
 
     public String getType() {
-        return "CirtEquipment";
+        return "CritEquipment";
     }
 
     public int getCritical() {

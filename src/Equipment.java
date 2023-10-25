@@ -48,16 +48,16 @@ public class Equipment implements Commodity {
         }
         int price = Integer.parseInt(strings.get(5));
         String equipmentType = strings.get(6);
-        if (equipmentType.equals("RegularEquipment")) {
+        if ("RegularEquipment".equals(equipmentType)) {
             Equipment regularEquipment =
                     new RegularEquipment(equipmentId, equipmentName, equipmentStar, price);
             return regularEquipment;
-        } else if (equipmentType.equals("CritEquipment")) {
+        } else if ("CritEquipment".equals(equipmentType)) {
             int critical = Integer.parseInt(strings.get(7));
             Equipment critEquipment =
-                    new CirtEquipment(equipmentId, equipmentName, equipmentStar, price, critical);
+                    new CritEquipment(equipmentId, equipmentName, equipmentStar, price, critical);
             return critEquipment;
-        } else if (equipmentType.equals("EpicEquipment")) {
+        } else if ("EpicEquipment".equals(equipmentType)) {
             double ratio = Double.parseDouble(strings.get(7));
             Equipment epicEquipment =
                     new EpicEquipment(equipmentId, equipmentName, equipmentStar, price, ratio);
