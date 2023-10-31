@@ -9,7 +9,7 @@ import java.util.TreeMap;
 
 public class Backpack {
 
-    private TreeMap<Integer, Bottle> bottleTreeMap = new TreeMap<>();
+    private TreeMap<Integer, CritEquipment.Bottle> bottleTreeMap = new TreeMap<>();
     private TreeMap<Integer, Equipment> equipmentTreeMap = new TreeMap<>();
     private TreeMap<Integer, Food> foodTreeMap = new TreeMap<>();
 
@@ -67,7 +67,7 @@ public class Backpack {
         return equipment;
     }
 
-    public void carryBottle(Bottle bottle) {
+    public void carryBottle(CritEquipment.Bottle bottle) {
         bottleTreeMap.put(bottle.getId(), bottle);
     }
 
@@ -146,7 +146,7 @@ public class Backpack {
         if (capacity == 0) {
             bottleTreeMap.remove(bottleId);
         } else {
-            Bottle bottle = bottleTreeMap.get(bottleId);
+            CritEquipment.Bottle bottle = bottleTreeMap.get(bottleId);
             bottleTreeMap.get(bottleId).resetCapacity();
             if (bottle instanceof RegularBottle) {
                 capacity = capacity;

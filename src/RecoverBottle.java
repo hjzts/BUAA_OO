@@ -4,7 +4,7 @@
  *
  * @author hugo
  */
-public class RecoverBottle extends Bottle {
+public class RecoverBottle extends CritEquipment.Bottle {
     private double ratio;
 
     public RecoverBottle(int id, String name, int capacity, long price, double ratio) {

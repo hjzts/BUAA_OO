@@ -4,7 +4,7 @@
  *
  * @author hugo
  */
-public class ReinforcedBottle extends Bottle {
+public class ReinforcedBottle extends CritEquipment.Bottle {
     private double ratio;
 
     public ReinforcedBottle(int id, String name, int capacity, long price, double ratio) {

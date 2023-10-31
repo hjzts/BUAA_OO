@@ -4,7 +4,7 @@
  *
  * @author hugo
  */
-public class RegularBottle extends Bottle {
+public class RegularBottle extends CritEquipment.Bottle {
     public RegularBottle(int id, String name, int capacity, long price) {
         super(id, name, capacity, price);
     }
