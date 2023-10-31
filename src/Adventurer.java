@@ -318,6 +318,7 @@ public class Adventurer implements Commodity {
         while (iteratorBottle.hasNext()) {
             Bottle bottle = iteratorBottle.next();
             if (backpack.hasBottle(bottle)) {
+                money += bottle.getCommodityValue();
                 iteratorBottle.remove();
             }
         }
@@ -325,6 +326,7 @@ public class Adventurer implements Commodity {
         while (iteratorEquipment.hasNext()) {
             Equipment equipment = iteratorEquipment.next();
             if (backpack.hasEquipment(equipment)) {
+                money += equipment.getCommodityValue();
                 iteratorEquipment.remove();
             }
         }
@@ -332,6 +334,7 @@ public class Adventurer implements Commodity {
         while (iteratorFood.hasNext()) {
             Food food = iteratorFood.next();
             if (backpack.hasFood(food)) {
+                money += food.getCommodityValue();
                 iteratorFood.remove();
             }
         }

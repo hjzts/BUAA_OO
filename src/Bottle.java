@@ -40,10 +40,10 @@ public class Bottle implements Commodity {
     public void setIsEmpty(boolean isEmpty) {
         this.isEmpty = isEmpty;
     }
+
     public void resetCapacity() {
         this.capacity = 0;
     }
-
 
     public static Bottle newBottle(ArrayList<String> strings) {
         int bottleId = Integer.parseInt(strings.get(2));
