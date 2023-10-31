@@ -346,4 +346,19 @@ public class Adventurer implements Commodity {
     public void removeMoney(long money) {
         this.money -= money;
     }
+
+    public long adventurerHiringHelp(long needMoney) {
+        long getMoney = 0;
+        for (Adventurer adventurer : hireAdventurerMap.values()) {
+            if (adventurer.getMoney() >= needMoney) {
+                getMoney += needMoney;
+                adventurer.removeMoney(needMoney);
+            }
+            else {
+                getMoney += adventurer.getMoney();
+                adventurer.removeMoney(adventurer.getMoney());
+            }
+        }
+        return getMoney;
+    }
 }

@@ -11,12 +11,14 @@ import java.util.ArrayList;
 
 public class FightMode {
     private ArrayList<Adventurer> adventurerInFightModeList = new ArrayList<>();
+    private ArrayList<Integer> adventurerHitPointBefore = new ArrayList<>();
     private HashMap<String, ArrayList<String>> fightLogTimeMap = new HashMap<>();
     private HashMap<Integer, ArrayList<String>> attackLogMap = new HashMap<>();
     private HashMap<Integer, ArrayList<String>> beAttackedLogMap = new HashMap<>();
 
     public void enterFightMode(Adventurer adventurer) {
         adventurerInFightModeList.add(adventurer);
+        adventurerHitPointBefore.add(adventurer.getHitPoint());
     }
 
     public void timeLogTreeInsert(String outputLog) {
@@ -223,6 +225,18 @@ public class FightMode {
             }
         } else {
             System.out.println("No Matched Log");
+        }
+    }
+
+    public void adventurerHiringHelp() {
+        for (int i = 0; i < adventurerInFightModeList.size(); i++) {
+            int hitPointBefore = adventurerHitPointBefore.get(i);
+            int hitPointAfter = adventurerInFightModeList.get(i).getHitPoint();
+            if (hitPointAfter <= hitPointBefore / 2) {
+                long getMoney = adventurerInFightModeList.get(i).adventurerHiringHelp(
+                        (hitPointBefore - hitPointAfter) * 10000L);
+                adventurerInFightModeList.get(i).addMoney(getMoney);
+            }
         }
     }
 
