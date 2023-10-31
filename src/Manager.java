@@ -143,6 +143,7 @@ public class Manager {
                 break;
             case "23":
                 adventurerShopping(strings);
+                break;
             default:
                 break;
         }
@@ -256,7 +257,6 @@ public class Manager {
         int foodCount = adventurersMap.get(adventurerId).getFoodCount();
         System.out.println(foodCount + " " + foodName);
     }
-
 
     public static void equipmentCarry(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
@@ -392,7 +392,8 @@ public class Manager {
     public static void adventurerCommodityGet(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
         int commodityNum = adventurersMap.get(adventurerId).getCommodityNum();
-        long commodityValue = adventurersMap.get(adventurerId).getCommodityValue() - adventurersMap.get(adventurerId).getMoney();
+        long commodityValue = adventurersMap.get(adventurerId).getCommodityValue()
+                - adventurersMap.get(adventurerId).getMoney();
         System.out.println(commodityNum + " " + commodityValue);
     }
 
@@ -414,7 +415,9 @@ public class Manager {
 
     public static void adventurerSellAllCarried(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
-        adventurersMap.get(adventurerId).sellAllCarried();
+        String adventurerName = adventurersMap.get(adventurerId).getName();
+        long money = adventurersMap.get(adventurerId).sellAllCarried();
+        System.out.println(adventurerName + " emptied the backpack " + money);
     }
 
     public static void adventurerShopping(ArrayList<String> strings) {
@@ -423,15 +426,38 @@ public class Manager {
         int commodityId = Integer.parseInt(strings.get(2));
         String commodityName = strings.get(3);
         String commodityType = strings.get(4);
-        if (commodityType.equals("RegularBottle") || commodityType.equals("RecoverBottle") || commodityType.equals("ReinforcedBottle")) {
+        if (commodityType.equals("RegularBottle") || commodityType.equals("RecoverBottle")
+                || commodityType.equals("ReinforcedBottle")) {
+            long price = Shop.getBottlePrice();
             Bottle bottle = Shop.bottleAdventurerPurchase(strings, money);
+            if (bottle == null) {
+                System.out.println("failed to buy " + commodityName + " for " + price);
+                return;
+            }
             adventurersMap.get(adventurerId).addBottle(bottle);
-        } else if (commodityType.equals("RegularEquipment") || commodityType.equals("CritEquipment") || commodityType.equals("EpicEquipment")) {
+            adventurersMap.get(adventurerId).removeMoney(price);
+            System.out.println("successfully buy " + commodityName + " for " + price);
+        } else if (commodityType.equals("RegularEquipment") || commodityType.equals("CritEquipment")
+                || commodityType.equals("EpicEquipment")) {
+            long price = Shop.getEquipmentPrice();
             Equipment equipment = Shop.equipmentAdventurerPurchase(strings, money);
+            if (equipment == null) {
+                System.out.println("failed to buy " + commodityName + " for " + price);
+                return;
+            }
             adventurersMap.get(adventurerId).addEquipment(equipment);
+            adventurersMap.get(adventurerId).removeMoney(price);
+            System.out.println("successfully buy " + commodityName + " for " + price);
         } else if (commodityType.equals("Food")) {
+            long price = Shop.getFoodPrice();
             Food food = Shop.foodAdventurerPurchase(strings, money);
+            if (food == null) {
+                System.out.println("failed to buy " + commodityName + " for " + price);
+                return;
+            }
             adventurersMap.get(adventurerId).addFood(food);
+            adventurersMap.get(adventurerId).removeMoney(price);
+            System.out.println("successfully buy " + commodityName + " for " + price);
         }
     }
 
@@ -451,5 +477,4 @@ public class Manager {
             return null;
         }
     }
-
 }

@@ -48,9 +48,11 @@ public class Backpack {
         }
         return false;
     }
+
     public boolean hasEquipment(Equipment equipment) {
         return equipmentTreeMap.containsValue(equipment);
     }
+
     public Equipment getEquipment(String equipmentName) {
         boolean flag = false;
         Equipment equipment = null;
@@ -219,6 +221,7 @@ public class Backpack {
         }
         return false;
     }
+
     public boolean hasFood(Food food) {
         return foodTreeMap.containsValue(food);
     }
@@ -260,17 +263,21 @@ public class Backpack {
 
     public long sellAllCarried() {
         long money = 0;
-        for(Bottle bottle : bottleTreeMap.values()) {
+        for (Bottle bottle : bottleTreeMap.values()) {
+            Shop.bottleAdventurerSell(bottle);
             money += bottle.getCommodityValue();
         }
-        for(Food food : foodTreeMap.values()) {
+        for (Food food : foodTreeMap.values()) {
+            Shop.foodAdventurerSell(food);
             money += food.getCommodityValue();
         }
-        for(Equipment equipment : equipmentTreeMap.values()) {
+        for (Equipment equipment : equipmentTreeMap.values()) {
+            Shop.equipmentAdventurerSell(equipment);
             money += equipment.getCommodityValue();
         }
         return money;
     }
+
     public void clear() {
         bottleTreeMap.clear();
         foodTreeMap.clear();

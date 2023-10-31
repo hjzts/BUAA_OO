@@ -312,7 +312,7 @@ public class Adventurer implements Commodity {
         money += price;
     }
 
-    public void sellAllCarried() {
+    public long sellAllCarried() {
         long money = backpack.sellAllCarried();
         Iterator<Bottle> iteratorBottle = bottlesMap.values().iterator();
         while (iteratorBottle.hasNext()) {
@@ -324,18 +324,23 @@ public class Adventurer implements Commodity {
         Iterator<Equipment> iteratorEquipment = equipmentsMap.values().iterator();
         while (iteratorEquipment.hasNext()) {
             Equipment equipment = iteratorEquipment.next();
-            if(backpack.hasEquipment(equipment)) {
+            if (backpack.hasEquipment(equipment)) {
                 iteratorEquipment.remove();
             }
         }
         Iterator<Food> iteratorFood = foodMap.values().iterator();
-        while(iteratorFood.hasNext()) {
+        while (iteratorFood.hasNext()) {
             Food food = iteratorFood.next();
-            if(backpack.hasFood(food)) {
+            if (backpack.hasFood(food)) {
                 iteratorFood.remove();
             }
         }
         backpack.clear();
         addMoney(money);
+        return money;
+    }
+
+    public void removeMoney(long money) {
+        this.money -= money;
     }
 }

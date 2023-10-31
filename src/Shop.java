@@ -126,4 +126,25 @@ public class Shop {
         foodEnergySum += food.getEnergy();
         foodSellNum++;
     }
+
+    public static long getBottlePrice() {
+        if (bottleSellNum == 0) {
+            return 0;
+        }
+        return bottlePriceSum / bottleSellNum;
+    }
+
+    public static long getEquipmentPrice() {
+        if (equipmentSellNum == 0) {
+            return 0;
+        }
+        return equipmentPriceSum / equipmentSellNum;
+    }
+
+    public static long getFoodPrice() {
+        if (foodSellNum == 0) {
+            return 0;
+        }
+        return foodPriceSum / foodSellNum;
+    }
 }
