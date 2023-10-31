@@ -11,6 +11,7 @@ public class Adventurer implements Commodity {
     private String name;
     private int hitPoint;
     private int level;
+    private long money;
     // private HashMap<Integer, Commodity> commodityMap = new HashMap<>();
     private HashMap<Integer, Bottle> bottlesMap = new HashMap<>();
     private HashMap<Integer, Equipment> equipmentsMap = new HashMap<>();
@@ -80,6 +81,9 @@ public class Adventurer implements Commodity {
         return null;
     }
 
+    public Bottle getBottle(int bottleId) {
+        return bottlesMap.get(bottleId);
+    }
     // equipment
     public void addEquipment(Equipment equipment) {
         equipmentsMap.put(equipment.getId(), equipment);
@@ -120,6 +124,9 @@ public class Adventurer implements Commodity {
         return backpack.hasEquipment(equipmentName);
     }
 
+    public Equipment getEquipment(int equipmentId) {
+        return equipmentsMap.get(equipmentId);
+    }
     //food
     public void addFood(Food food) {
         foodMap.put(food.getId(), food);
@@ -146,6 +153,9 @@ public class Adventurer implements Commodity {
         return backpack.hasFoodByName(foodName);
     }
 
+    public Food getFood(int foodId) {
+        return foodMap.get(foodId);
+    }
     public void carryBottle(int bottleId) {
         if (!bottlesMap.containsKey(bottleId)) {
             return;
@@ -183,11 +193,11 @@ public class Adventurer implements Commodity {
 
     public int useBottle(String bottleName) {
         int bottleId = getBottleId(bottleName);
-        int capacity = backpack.useBottle(bottleName,hitPoint);
-        if (capacity == 0) {
+        Bottle bottle = backpack.useBottle(bottleName,hitPoint);
+        if (bottle == null) {
             bottlesMap.remove(bottleId);
         }
-        return capacity;
+        return backpack.getBottleHitPoint(bottle,hitPoint);
     }
 
     public boolean hasFood(String foodName) {
@@ -216,7 +226,7 @@ public class Adventurer implements Commodity {
     }
 
     public long getCommodityValue() {
-        long value = 0;
+        long value = money;
         for (Bottle bottle : bottlesMap.values()) {
             value += bottle.getCommodityValue();
         }
@@ -232,6 +242,9 @@ public class Adventurer implements Commodity {
         return value;
     }
 
+    public long getMoney() {
+        return money;
+    }
     public long getMaxCommodityValue() {
         long value = 0;
         for (Bottle bottle : bottlesMap.values()) {
@@ -286,5 +299,8 @@ public class Adventurer implements Commodity {
                 return;
             }
         }
+    }
+    public void addMoney(long price) {
+        money += price;
     }
 }

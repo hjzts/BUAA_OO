@@ -124,7 +124,7 @@ public class Backpack {
         }
     }
 
-    public int useBottle(String bottleName, int hitPoint) {
+    public int getBottleCapacity(String bottleName) {
         int capacity = 0;
         int bottleId = 0;
         boolean flag = false;
@@ -142,23 +142,48 @@ public class Backpack {
                 }
             }
         }
+        return capacity;
+    }
 
-        if (capacity == 0) {
-            bottleTreeMap.remove(bottleId);
-        } else {
-            Bottle bottle = bottleTreeMap.get(bottleId);
-            bottleTreeMap.get(bottleId).resetCapacity();
-            if (bottle instanceof RegularBottle) {
-                capacity = capacity;
-            } else if (bottle instanceof ReinforcedBottle) {
-                double ratio = bottle.getRatio();
-                capacity = (int) (capacity * (1 + ratio));
-            } else if (bottle instanceof RecoverBottle) {
-                double ratio = bottle.getRatio();
-                capacity = (int) (ratio * hitPoint);
+    public int getBottleHitPoint(Bottle bottle,int hitPoint) {
+        int capacity = bottle.getCapacity();
+        int bottleHitPoint = 0;
+        if (bottle instanceof RegularBottle) {
+            bottleHitPoint = capacity;
+        } else if (bottle instanceof ReinforcedBottle) {
+            double ratio = bottle.getRatio();
+            bottleHitPoint = (int) (capacity * (1 + ratio));
+        } else if (bottle instanceof RecoverBottle) {
+            double ratio = bottle.getRatio();
+            bottleHitPoint = (int) (ratio * hitPoint);
+        }
+        return bottleHitPoint;
+    }
+    public Bottle useBottle(String bottleName, int hitPoint) {
+        int bottleId = 0;
+        boolean isEmpty = false;
+        boolean flag = false;
+        for (Integer key : bottleTreeMap.keySet()) {
+            if (bottleTreeMap.get(key).getName().equals(bottleName)) {
+                if (!flag) {
+                    isEmpty = bottleTreeMap.get(key).getIsEmpty();
+                    bottleId = key;
+                    flag = true;
+                } else if (bottleId > key) {
+                    isEmpty = bottleTreeMap.get(key).getIsEmpty();
+                    bottleId = key;
+                }
             }
         }
-        return capacity;
+
+        if (isEmpty) {
+            bottleTreeMap.remove(bottleId);
+            return null;
+        } else {
+            Bottle bottle = bottleTreeMap.get(bottleId);
+            //bottleTreeMap.get(bottleId).resetCapacity();
+            return bottle;
+        }
     }
 
     public void deleteBottle(int bottleId) {

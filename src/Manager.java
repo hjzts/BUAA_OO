@@ -35,7 +35,7 @@ public class Manager {
                 case "3":
                     // Bottle.delete();
                     //if(printTestFlag)  System.out.print("3 :");
-                    bottleDelete(strings);
+                    bottleSell(strings);
                     break;
                 case "4":
                     //Equipment.add();
@@ -44,7 +44,7 @@ public class Manager {
                 case "5":
                     //Equipment.delete();
                     //if(printTestFlag)  System.out.print("5 :");
-                    equipmentDelete(strings);
+                    equipmentSell(strings);
                     break;
                 case "6":
                     //Equipment.upgrade();
@@ -58,7 +58,7 @@ public class Manager {
                 case "8":
                     //Food.delete();
                     //if(printTestFlag)  System.out.print("8 :");
-                    foodDelete(strings);
+                    foodSell(strings);
                     break;
                 default:
                     operation2(strings);
@@ -135,6 +135,11 @@ public class Manager {
             case "21":
                 adventurerCommodityClassGet(strings);
                 break;
+            case "22":
+                adventurerSellAllCarried(strings);
+                break;
+            case "23":
+                adventurerShopping(strings);
             default:
                 break;
         }
@@ -153,6 +158,16 @@ public class Manager {
         adventurersMap.get(adventurerId).addBottle(bottle);
     }
 
+    public static void bottleSell(ArrayList<String> strings) {
+        int adventurerId = Integer.parseInt(strings.get(1));
+        int bottleId = Integer.parseInt(strings.get(2));
+        Bottle bottle = adventurersMap.get(adventurerId).getBottle(bottleId);
+        long price = bottle.getCommodityValue();
+        adventurersMap.get(adventurerId).addMoney(price);
+        Shop.bottleAdventurerSell(bottle);
+        bottleDelete(strings);
+    }
+
     public static void bottleDelete(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
         int bottleId = Integer.parseInt(strings.get(2));
@@ -168,6 +183,16 @@ public class Manager {
         int adventurerId = Integer.parseInt(strings.get(1));
         Equipment equipment = Equipment.newEquipment(strings);
         adventurersMap.get(adventurerId).addEquipment(equipment);
+    }
+
+    public static void equipmentSell(ArrayList<String> stirngs) {
+        int adventurerId = Integer.parseInt(strings.get(1));
+        int equipmentId = Integer.parseInt(strings.get(2));
+        Equipment equipment = adventurersMap.get(adventurerId).getEquipment(equipmentId);
+        long price = equipment.getCommodityValue();
+        adventurersMap.get(adventurerId).addMoney(price);
+        Shop.equipmentAdventurerSell(equipment);
+        equipmentDelete(strings);
     }
 
     public static void equipmentDelete(ArrayList<String> strings) {
@@ -209,6 +234,16 @@ public class Manager {
         adventurersMap.get(adventurerId).addFood(food);
     }
 
+    public static void foodSell(ArrayList<String> strings) {
+        int adventurerId = Integer.parseInt(strings.get(1));
+        int foodId = Integer.parseInt(strings.get(2));
+        Food food = adventurersMap.get(adventurerId).getFood(foodId);
+        long price  = food.getCommodityValue();
+        adventurersMap.get(adventurerId).addMoney(price);
+        Shop.foodAdventurerSell(food);
+        foodDelete(strings);
+    }
+
     public static void foodDelete(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
         int foodId = Integer.parseInt(strings.get(2));
@@ -218,6 +253,7 @@ public class Manager {
         int foodCount = adventurersMap.get(adventurerId).getFoodCount();
         System.out.println(foodCount + " " + foodName);
     }
+
 
     public static void equipmentCarry(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
@@ -253,8 +289,8 @@ public class Manager {
 
         if (adventurersMap.get(adventurerId).hasBottleInBackpack(bottleName)) {
             int bottleId = adventurersMap.get(adventurerId).getBottleId(bottleName);
-            int bottleCapacity = adventurersMap.get(adventurerId).useBottle(bottleName);
-            adventurersMap.get(adventurerId).increaseHitPoint(bottleCapacity);
+            int bottleHitPoint = adventurersMap.get(adventurerId).useBottle(bottleName);
+            adventurersMap.get(adventurerId).increaseHitPoint(bottleHitPoint);
             int hitPoint = adventurersMap.get(adventurerId).getHitPoint();
             System.out.println(bottleId + " " + hitPoint);
             return true;
@@ -353,7 +389,7 @@ public class Manager {
     public static void adventurerCommodityGet(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
         int commodityNum = adventurersMap.get(adventurerId).getCommodityNum();
-        long commodityValue = adventurersMap.get(adventurerId).getCommodityValue();
+        long commodityValue = adventurersMap.get(adventurerId).getCommodityValue() - adventurersMap.get(adventurerId).getMoney();
         System.out.println(commodityNum + " " + commodityValue);
     }
 
@@ -371,6 +407,15 @@ public class Manager {
         int adventurerId = Integer.parseInt(strings.get(1));
         int commodityId = Integer.parseInt(strings.get(2));
         adventurersMap.get(adventurerId).getCommodityClass(commodityId);
+    }
+
+    public static void adventurerSellAllCarried(ArrayList<String> strings) {
+        int adventurerId = Integer.parseInt(strings.get(1));
+
+    }
+
+    public static void adventurerShopping(ArrayList<String> strings) {
+
     }
 
     public static Adventurer getAdventurer(String name) {

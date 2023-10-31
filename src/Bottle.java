@@ -10,14 +10,15 @@ public class Bottle implements Commodity {
     private int id;
     private String name;
     private int capacity;
-
     private long price;
+    private boolean isEmpty;
 
     public Bottle(int id, String name, int capacity, long price) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;
         this.price = price;
+        this.isEmpty = false;
     }
 
     public String getName() {
@@ -32,9 +33,17 @@ public class Bottle implements Commodity {
         return capacity;
     }
 
+    public boolean getIsEmpty() {
+        return isEmpty;
+    }
+
+    public void setIsEmpty(boolean isEmpty) {
+        this.isEmpty = isEmpty;
+    }
     public void resetCapacity() {
         this.capacity = 0;
     }
+
 
     public static Bottle newBottle(ArrayList<String> strings) {
         int bottleId = Integer.parseInt(strings.get(2));
