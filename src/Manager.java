@@ -35,6 +35,7 @@ public class Manager {
                 case "3":
                     // Bottle.delete();
                     //if(printTestFlag)  System.out.print("3 :");
+                    //bottleDelete(strings);
                     bottleSell(strings);
                     break;
                 case "4":
@@ -44,6 +45,7 @@ public class Manager {
                 case "5":
                     //Equipment.delete();
                     //if(printTestFlag)  System.out.print("5 :");
+                    //equipmentDelete(strings);
                     equipmentSell(strings);
                     break;
                 case "6":
@@ -58,6 +60,7 @@ public class Manager {
                 case "8":
                     //Food.delete();
                     //if(printTestFlag)  System.out.print("8 :");
+                    //foodDelete(strings);
                     foodSell(strings);
                     break;
                 default:
@@ -238,7 +241,7 @@ public class Manager {
         int adventurerId = Integer.parseInt(strings.get(1));
         int foodId = Integer.parseInt(strings.get(2));
         Food food = adventurersMap.get(adventurerId).getFood(foodId);
-        long price  = food.getCommodityValue();
+        long price = food.getCommodityValue();
         adventurersMap.get(adventurerId).addMoney(price);
         Shop.foodAdventurerSell(food);
         foodDelete(strings);
@@ -411,11 +414,25 @@ public class Manager {
 
     public static void adventurerSellAllCarried(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
-
+        adventurersMap.get(adventurerId).sellAllCarried();
     }
 
     public static void adventurerShopping(ArrayList<String> strings) {
-
+        int adventurerId = Integer.parseInt(strings.get(1));
+        long money = adventurersMap.get(adventurerId).getMoney();
+        int commodityId = Integer.parseInt(strings.get(2));
+        String commodityName = strings.get(3);
+        String commodityType = strings.get(4);
+        if (commodityType.equals("RegularBottle") || commodityType.equals("RecoverBottle") || commodityType.equals("ReinforcedBottle")) {
+            Bottle bottle = Shop.bottleAdventurerPurchase(strings, money);
+            adventurersMap.get(adventurerId).addBottle(bottle);
+        } else if (commodityType.equals("RegularEquipment") || commodityType.equals("CritEquipment") || commodityType.equals("EpicEquipment")) {
+            Equipment equipment = Shop.equipmentAdventurerPurchase(strings, money);
+            adventurersMap.get(adventurerId).addEquipment(equipment);
+        } else if (commodityType.equals("Food")) {
+            Food food = Shop.foodAdventurerPurchase(strings, money);
+            adventurersMap.get(adventurerId).addFood(food);
+        }
     }
 
     public static Adventurer getAdventurer(String name) {

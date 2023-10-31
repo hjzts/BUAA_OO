@@ -39,6 +39,9 @@ public class Shop {
 
     public static Bottle bottleAdventurerPurchase(ArrayList<String> strings, long money) {
         // adventurer purchase , the shop sell the bottle
+        if (bottleSellNum == 0) {
+            return null;
+        }
         long price = bottlePriceSum / bottleSellNum;
         if (price > money) {
             return null;
@@ -50,13 +53,11 @@ public class Shop {
         String bottleName = strings.get(3);
         if (strings.get(4).equals("RegularBottle")) {
             return new RegularBottle(bottleId, bottleName, (int) capacity, price);
-        }
-        else if (strings.get(5).equals("RecoverBottle")) {
-            double ratio = Double.parseDouble(strings.get(6));
+        } else if (strings.get(4).equals("RecoverBottle")) {
+            double ratio = Double.parseDouble(strings.get(5));
             return new RecoverBottle(bottleId, bottleName, (int) capacity, price, ratio);
-        }
-        else if (strings.get(5).equals("ReinforcedBottle")) {
-            double ratio = Double.parseDouble(strings.get(6));
+        } else if (strings.get(4).equals("ReinforcedBottle")) {
+            double ratio = Double.parseDouble(strings.get(5));
             return new ReinforcedBottle(bottleId, bottleName, (int) capacity, price, ratio);
         }
         return null;
@@ -64,6 +65,9 @@ public class Shop {
 
     public static Equipment equipmentAdventurerPurchase(ArrayList<String> strings, long money) {
         // adventurer purchase , the shop sell the equipment
+        if (equipmentSellNum == 0) {
+            return null;
+        }
         long price = equipmentPriceSum / equipmentSellNum;
         if (price > money) {
             return null;
@@ -75,12 +79,10 @@ public class Shop {
         String equipmentName = strings.get(3);
         if (strings.get(4).equals("RegularEquipment")) {
             return new RegularEquipment(equipmentId, equipmentName, (int) star, price);
-        }
-        else if (strings.get(4).equals("CritEquipment")) {
+        } else if (strings.get(4).equals("CritEquipment")) {
             int critical = Integer.parseInt(strings.get(5));
             return new CritEquipment(equipmentId, equipmentName, (int) star, price, critical);
-        }
-        else if (strings.get(4).equals("EpicEquipment")) {
+        } else if (strings.get(4).equals("EpicEquipment")) {
             double ratio = Double.parseDouble(strings.get(5));
             return new EpicEquipment(equipmentId, equipmentName, (int) star, price, ratio);
         }
@@ -89,6 +91,9 @@ public class Shop {
 
     public static Food foodAdventurerPurchase(ArrayList<String> strings, long money) {
         // adventurer purchase , the shop sell the food
+        if (foodSellNum == 0) {
+            return null;
+        }
         long price = foodPriceSum / foodSellNum;
         if (price > money) {
             return null;

@@ -5,6 +5,7 @@
  */
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Adventurer implements Commodity {
     private int id;
@@ -24,6 +25,7 @@ public class Adventurer implements Commodity {
         this.name = name;
         this.hitPoint = 500;
         this.level = 1;
+        this.money = 0;
     }
 
     public int getId() {
@@ -84,6 +86,7 @@ public class Adventurer implements Commodity {
     public Bottle getBottle(int bottleId) {
         return bottlesMap.get(bottleId);
     }
+
     // equipment
     public void addEquipment(Equipment equipment) {
         equipmentsMap.put(equipment.getId(), equipment);
@@ -127,6 +130,7 @@ public class Adventurer implements Commodity {
     public Equipment getEquipment(int equipmentId) {
         return equipmentsMap.get(equipmentId);
     }
+
     //food
     public void addFood(Food food) {
         foodMap.put(food.getId(), food);
@@ -146,16 +150,17 @@ public class Adventurer implements Commodity {
     }
 
     public boolean hasFoodInBackpack(int foodId) {
-        return backpack.hasFoodById(foodId);
+        return backpack.hasFood(foodId);
     }
 
     public boolean hasFoodInBackpack(String foodName) {
-        return backpack.hasFoodByName(foodName);
+        return backpack.hasFood(foodName);
     }
 
     public Food getFood(int foodId) {
         return foodMap.get(foodId);
     }
+
     public void carryBottle(int bottleId) {
         if (!bottlesMap.containsKey(bottleId)) {
             return;
@@ -193,11 +198,12 @@ public class Adventurer implements Commodity {
 
     public int useBottle(String bottleName) {
         int bottleId = getBottleId(bottleName);
-        Bottle bottle = backpack.useBottle(bottleName,hitPoint);
-        if (bottle == null) {
+        Bottle bottle = backpack.useBottle(bottleName, hitPoint);
+        if (bottle == null || bottle.getIsEmpty()) {
             bottlesMap.remove(bottleId);
+            return 0;
         }
-        return backpack.getBottleHitPoint(bottle,hitPoint);
+        return backpack.getBottleHitPoint(bottle, hitPoint);
     }
 
     public boolean hasFood(String foodName) {
@@ -245,6 +251,7 @@ public class Adventurer implements Commodity {
     public long getMoney() {
         return money;
     }
+
     public long getMaxCommodityValue() {
         long value = 0;
         for (Bottle bottle : bottlesMap.values()) {
@@ -300,7 +307,35 @@ public class Adventurer implements Commodity {
             }
         }
     }
+
     public void addMoney(long price) {
         money += price;
+    }
+
+    public void sellAllCarried() {
+        long money = backpack.sellAllCarried();
+        Iterator<Bottle> iteratorBottle = bottlesMap.values().iterator();
+        while (iteratorBottle.hasNext()) {
+            Bottle bottle = iteratorBottle.next();
+            if (backpack.hasBottle(bottle)) {
+                iteratorBottle.remove();
+            }
+        }
+        Iterator<Equipment> iteratorEquipment = equipmentsMap.values().iterator();
+        while (iteratorEquipment.hasNext()) {
+            Equipment equipment = iteratorEquipment.next();
+            if(backpack.hasEquipment(equipment)) {
+                iteratorEquipment.remove();
+            }
+        }
+        Iterator<Food> iteratorFood = foodMap.values().iterator();
+        while(iteratorFood.hasNext()) {
+            Food food = iteratorFood.next();
+            if(backpack.hasFood(food)) {
+                iteratorFood.remove();
+            }
+        }
+        backpack.clear();
+        addMoney(money);
     }
 }

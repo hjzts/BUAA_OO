@@ -48,7 +48,9 @@ public class Backpack {
         }
         return false;
     }
-
+    public boolean hasEquipment(Equipment equipment) {
+        return equipmentTreeMap.containsValue(equipment);
+    }
     public Equipment getEquipment(String equipmentName) {
         boolean flag = false;
         Equipment equipment = null;
@@ -102,6 +104,10 @@ public class Backpack {
         return false;
     }
 
+    public boolean hasBottle(Bottle bottle) {
+        return bottleTreeMap.containsValue(bottle);
+    }
+
     public int getBottleId(String bottleName) {
         if (bottleTreeMap.isEmpty()) {
             return 0;
@@ -145,20 +151,25 @@ public class Backpack {
         return capacity;
     }
 
-    public int getBottleHitPoint(Bottle bottle,int hitPoint) {
+    public int getBottleHitPoint(Bottle bottle, int hitPoint) {
         int capacity = bottle.getCapacity();
         int bottleHitPoint = 0;
-        if (bottle instanceof RegularBottle) {
+        if (bottle instanceof RecoverBottle) {
+            double ratio = bottle.getRatio();
+            bottleHitPoint = (int) (ratio * hitPoint);
+            return bottleHitPoint;
+        } else if (bottle instanceof RegularBottle) {
             bottleHitPoint = capacity;
         } else if (bottle instanceof ReinforcedBottle) {
             double ratio = bottle.getRatio();
             bottleHitPoint = (int) (capacity * (1 + ratio));
-        } else if (bottle instanceof RecoverBottle) {
-            double ratio = bottle.getRatio();
-            bottleHitPoint = (int) (ratio * hitPoint);
+        }
+        if (bottle.getIsEmpty()) {
+            return 0;
         }
         return bottleHitPoint;
     }
+
     public Bottle useBottle(String bottleName, int hitPoint) {
         int bottleId = 0;
         boolean isEmpty = false;
@@ -181,6 +192,7 @@ public class Backpack {
             return null;
         } else {
             Bottle bottle = bottleTreeMap.get(bottleId);
+            bottle.setIsEmpty(true);
             //bottleTreeMap.get(bottleId).resetCapacity();
             return bottle;
         }
@@ -192,11 +204,11 @@ public class Backpack {
         }
     }
 
-    public boolean hasFoodById(int foodId) {
+    public boolean hasFood(int foodId) {
         return foodTreeMap.containsKey(foodId);
     }
 
-    public boolean hasFoodByName(String foodName) {
+    public boolean hasFood(String foodName) {
         if (foodTreeMap.isEmpty()) {
             return false;
         }
@@ -206,6 +218,9 @@ public class Backpack {
             }
         }
         return false;
+    }
+    public boolean hasFood(Food food) {
+        return foodTreeMap.containsValue(food);
     }
 
     public int getFoodId(String foodName) {
@@ -242,4 +257,24 @@ public class Backpack {
         }
         return -1;
     }
+
+    public long sellAllCarried() {
+        long money = 0;
+        for(Bottle bottle : bottleTreeMap.values()) {
+            money += bottle.getCommodityValue();
+        }
+        for(Food food : foodTreeMap.values()) {
+            money += food.getCommodityValue();
+        }
+        for(Equipment equipment : equipmentTreeMap.values()) {
+            money += equipment.getCommodityValue();
+        }
+        return money;
+    }
+    public void clear() {
+        bottleTreeMap.clear();
+        foodTreeMap.clear();
+        equipmentTreeMap.clear();
+    }
+
 }
