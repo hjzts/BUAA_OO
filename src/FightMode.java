@@ -242,5 +242,6 @@ public class FightMode {
 
     public void exitFightMode() {
         adventurerInFightModeList.clear();
+        adventurerHitPointBefore.clear();
     }
 }

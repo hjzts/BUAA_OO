@@ -123,6 +123,10 @@ public class Adventurer implements Commodity {
         return backpack.getEquipment(equipmentName);
     }
 
+    public boolean hasEquipment(int equipmentId) {
+        return equipmentsMap.containsKey(equipmentId);
+    }
+
     public boolean hasEquipmentInBackpack(String equipmentName) {
         return backpack.hasEquipment(equipmentName);
     }

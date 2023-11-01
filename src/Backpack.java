@@ -76,7 +76,9 @@ public class Backpack {
     }
 
     public void carryFood(Food food) {
-        if (foodTreeMap.containsValue(food)) {
+        if (food == null) {
+            return;
+        } else if (foodTreeMap.containsValue(food)) {
             int id = food.getId();
             foodTreeMap.replace(id, food);
         } else {

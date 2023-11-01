@@ -166,6 +166,9 @@ public class Manager {
         int adventurerId = Integer.parseInt(strings.get(1));
         int bottleId = Integer.parseInt(strings.get(2));
         Bottle bottle = adventurersMap.get(adventurerId).getBottle(bottleId);
+        if (bottle == null) {
+            return;
+        }
         long price = bottle.getCommodityValue();
         adventurersMap.get(adventurerId).addMoney(price);
         Shop.bottleAdventurerSell(bottle);
@@ -193,6 +196,9 @@ public class Manager {
         int adventurerId = Integer.parseInt(strings.get(1));
         int equipmentId = Integer.parseInt(strings.get(2));
         Equipment equipment = adventurersMap.get(adventurerId).getEquipment(equipmentId);
+        if (equipment == null) {
+            return;
+        }
         long price = equipment.getCommodityValue();
         adventurersMap.get(adventurerId).addMoney(price);
         Shop.equipmentAdventurerSell(equipment);
@@ -215,7 +221,9 @@ public class Manager {
     public static void equipmentUpgrade(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
         int equipmentId = Integer.parseInt(strings.get(2));
-
+        if (!adventurersMap.get(adventurerId).hasEquipment(equipmentId)) {
+            return;
+        }
         String equipmentName = adventurersMap.get(adventurerId).getEquipmentName(equipmentId);
         adventurersMap.get(adventurerId).upgradeEquipment(equipmentId);
         int equipmentStar = adventurersMap.get(adventurerId).getEquipmentStar(equipmentId);
@@ -242,6 +250,9 @@ public class Manager {
         int adventurerId = Integer.parseInt(strings.get(1));
         int foodId = Integer.parseInt(strings.get(2));
         Food food = adventurersMap.get(adventurerId).getFood(foodId);
+        if (food == null) {
+            return;
+        }
         long price = food.getCommodityValue();
         adventurersMap.get(adventurerId).addMoney(price);
         Shop.foodAdventurerSell(food);
@@ -364,7 +375,7 @@ public class Manager {
                 System.out.println("有脏东西");
             }
         }
-//        fightMode.adventurerHiringHelp();
+        fightMode.adventurerHiringHelp();
         fightMode.exitFightMode();
     }
 
