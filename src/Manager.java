@@ -29,11 +29,11 @@ public class Manager {
                     adventurerAdd(strings);
                     break;
                 case "2":
-                    // Bottle.add();
+                    // CritEquipment.Bottle.add();
                     bottleAdd(strings);
                     break;
                 case "3":
-                    // Bottle.delete();
+                    // CritEquipment.Bottle.delete();
                     //if(printTestFlag)  System.out.print("3 :");
                     //bottleDelete(strings);
                     bottleSell(strings);
@@ -77,7 +77,7 @@ public class Manager {
                 equipmentCarry(strings);
                 break;
             case "10":
-                // Bottle.carry();
+                // CritEquipment.Bottle.carry();
                 bottleCarry(strings);
                 break;
             case "11":
@@ -85,7 +85,7 @@ public class Manager {
                 foodCarry(strings);
                 break;
             case "12":
-                // Bottle.use();
+                // CritEquipment.Bottle.use();
                 //if(printTestFlag)  System.out.print("12 :");
                 bottleUse(strings, 0);
                 break;
@@ -158,7 +158,7 @@ public class Manager {
 
     public static void bottleAdd(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
-        Bottle bottle = Bottle.newBottle(strings);
+        CritEquipment.Bottle bottle = CritEquipment.Bottle.newBottle(strings);
         adventurersMap.get(adventurerId).addBottle(bottle);
     }
 
@@ -288,7 +288,6 @@ public class Manager {
     public static boolean bottleUse(ArrayList<String> strings, int flag) {
         int adventurerId = Integer.parseInt(strings.get(1));
         String bottleName = strings.get(2);
-
 
         if (adventurersMap.get(adventurerId).hasBottleInBackpack(bottleName)) {
             int bottleId = adventurersMap.get(adventurerId).getBottleId(bottleName);

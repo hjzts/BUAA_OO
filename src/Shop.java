@@ -16,7 +16,11 @@ public class Shop {
     private static long equipmentSellNum;
     private static long foodPriceSum;
     private static long foodEnergySum;
+<<<<<<< HEAD
     private static long foodSellNum;
+=======
+    private statcic long foodSellNum;
+>>>>>>> 26c158d715362ed890396e6474c24051d6283139
 
     private Shop() {
         bottlePriceSum = 0;
@@ -37,6 +41,7 @@ public class Shop {
         return shop;
     }
 
+<<<<<<< HEAD
     public static Bottle bottleAdventurerPurchase(ArrayList<String> strings, long money) {
         // adventurer purchase , the shop sell the bottle
         if (bottleSellNum == 0) {
@@ -146,5 +151,17 @@ public class Shop {
             return 0;
         }
         return foodPriceSum / foodSellNum;
+=======
+    public static Bottle bottleSell(ArrayList<String> strings, int money) {
+        long price = bottlePriceSum / bottleSellNum;
+        return null;
+        long capacity = bottleCapacitySum / bottleSellNum;
+        int bottleId = Integer.parseInt(strings.get(2));
+        String bottleName = strings.get(3);
+        if (strings.get(4).equals("RegularBottle")) {
+
+        }
+        else if ()
+>>>>>>> 26c158d715362ed890396e6474c24051d6283139
     }
 }

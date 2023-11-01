@@ -14,7 +14,7 @@ public class Adventurer implements Commodity {
     private int level;
     private long money;
     // private HashMap<Integer, Commodity> commodityMap = new HashMap<>();
-    private HashMap<Integer, Bottle> bottlesMap = new HashMap<>();
+    private HashMap<Integer, CritEquipment.Bottle> bottlesMap = new HashMap<>();
     private HashMap<Integer, Equipment> equipmentsMap = new HashMap<>();
     private HashMap<Integer, Food> foodMap = new HashMap<>();
     private HashMap<Integer, Adventurer> hireAdventurerMap = new HashMap<>();
@@ -61,7 +61,7 @@ public class Adventurer implements Commodity {
     }
 
     //bottle
-    public void addBottle(Bottle bottle) {
+    public void addBottle(CritEquipment.Bottle bottle) {
         bottlesMap.put(bottle.getId(), bottle);
         // commodityMap.put(bottle.getId(),bottle);
     }
@@ -232,8 +232,9 @@ public class Adventurer implements Commodity {
     }
 
     public long getCommodityValue() {
-        long value = money;
-        for (Bottle bottle : bottlesMap.values()) {
+
+        long value = 0;
+        for (CritEquipment.Bottle bottle : bottlesMap.values()) {
             value += bottle.getCommodityValue();
         }
         for (Equipment equipment : equipmentsMap.values()) {
@@ -254,7 +255,7 @@ public class Adventurer implements Commodity {
 
     public long getMaxCommodityValue() {
         long value = 0;
-        for (Bottle bottle : bottlesMap.values()) {
+        for (CritEquipment.Bottle bottle : bottlesMap.values()) {
             if (value < bottle.getCommodityValue()) {
                 value = bottle.getCommodityValue();
             }

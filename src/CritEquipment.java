@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * 继承于Equipment的暴击装备
  * 2023/10/24 11:17
@@ -19,4 +21,5 @@ public class CritEquipment extends Equipment {
     public int getCritical() {
         return this.critical;
     }
+
 }
