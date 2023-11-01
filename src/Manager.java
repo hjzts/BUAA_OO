@@ -158,7 +158,7 @@ public class Manager {
 
     public static void bottleAdd(ArrayList<String> strings) {
         int adventurerId = Integer.parseInt(strings.get(1));
-        CritEquipment.Bottle bottle = CritEquipment.Bottle.newBottle(strings);
+        Bottle bottle = Bottle.newBottle(strings);
         adventurersMap.get(adventurerId).addBottle(bottle);
     }
 
