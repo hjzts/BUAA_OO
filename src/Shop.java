@@ -18,7 +18,6 @@ public class Shop {
     private static long foodEnergySum;
     private static long foodSellNum;
 
-
     private Shop() {
         bottlePriceSum = 0;
         bottleCapacitySum = 0;
@@ -37,7 +36,6 @@ public class Shop {
         }
         return shop;
     }
-
 
     public static Bottle bottleAdventurerPurchase(ArrayList<String> strings, long money) {
         // adventurer purchase , the shop sell the bottle

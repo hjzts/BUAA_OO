@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 /**
  * 继承于Equipment的暴击装备

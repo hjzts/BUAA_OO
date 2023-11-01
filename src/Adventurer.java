@@ -246,6 +246,7 @@ public class Adventurer implements Commodity {
         for (Adventurer adventurer : hireAdventurerMap.values()) {
             value += adventurer.getCommodityValue();
         }
+        value += money;
         return value;
     }
 
@@ -315,6 +316,7 @@ public class Adventurer implements Commodity {
 
     public long sellAllCarried() {
         long money = backpack.sellAllCarried();
+        addMoney(money);
         Iterator<Bottle> iteratorBottle = bottlesMap.values().iterator();
         while (iteratorBottle.hasNext()) {
             Bottle bottle = iteratorBottle.next();
@@ -337,7 +339,6 @@ public class Adventurer implements Commodity {
             }
         }
         backpack.clear();
-        addMoney(money);
         return money;
     }
 
