@@ -66,10 +66,6 @@ public class Equipment implements Commodity {
         return null;
     }
 
-    public int getCommodityNum() {
-        return 1;
-    }
-
     public long getCommodityValue() {
         return price;
     }

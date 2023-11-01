@@ -41,10 +41,6 @@ public class Bottle implements Commodity {
         this.isEmpty = isEmpty;
     }
 
-    public void resetCapacity() {
-        this.capacity = 0;
-    }
-
     public static Bottle newBottle(ArrayList<String> strings) {
         int bottleId = Integer.parseInt(strings.get(2));
         String bottleName = strings.get(3);
@@ -71,10 +67,6 @@ public class Bottle implements Commodity {
             return recoverBottle;
         }
         return null;
-    }
-
-    public int getCommodityNum() {
-        return 1;
     }
 
     public long getCommodityValue() {

@@ -10,7 +10,8 @@ import static org.junit.Assert.assertEquals;
 
 public class MainTest {
     private HashMap<Integer, Adventurer> adventurersMap;
-//    private ArrayList<ArrayList <String>> inputInfo;
+
+    //    private ArrayList<ArrayList <String>> inputInfo;
     @Before
     public void setUp() {
         adventurersMap = new HashMap<>();
@@ -19,7 +20,7 @@ public class MainTest {
 
     @Test
     public void main() {
-        String args1 = "489\n" +
+/*        String args1 = "489\n" +
                 "1 131562 GgDR3h1Xyy\n" +
                 "1 383187 P/Hg3G9e\n" +
                 "1 837058 ^4vL7a1v^g\n" +
@@ -541,11 +542,62 @@ public class MainTest {
                 "23 654011 749714 IR^3L*Ktc! RegularEquipment\n" +
                 "12 268338 VfHMNPyD\n" +
                 "23 925582 128236 FxadboHFc Food\n";
-        String args = args1 + args2;
+        String args = args1 + args2;*/
+        String args = "44\n" +
+                "1 123 advName\n" +
+                "1 1234 advName1\n" +
+                "2 123 111 botName 100 100 RegularBottle\n" +
+                "2 123 1111 botName 100 100 RecoverBottle 0.5\n" +
+                "2 123 11111 botName 100 100 ReinforcedBottle 0.5\n" +
+                "3 123 11111\n" +
+                "4 123 222 equName 100 100 RegularEquipment\n" +
+                "4 123 2222 equName2 100 100 CritEquipment 100\n" +
+                "4 123 22222 equName22 100 100 EpicEquipment 0.5\n" +
+                "4 123 222222 equName 100 100 EpicEquipment 0.5\n" +
+                "5 123 22222\n" +
+                "6 123 222\n" +
+                "7 123 333 foodName 100 100\n" +
+                "7 123 3333 foodName 100 100\n" +
+                "7 123 33333 foodName 100 100\n" +
+                "8 123 33333\n" +
+                "9 123 222\n" +
+                "9 123 2222\n" +
+                "9 123 22222\n" +
+                "10 123 111\n" +
+                "11 123 333\n" +
+                "11 123 3333\n" +
+                "12 123 botname\n" +
+                "12 123 botName\n" +
+                "13 123 foodname\n" +
+                "13 123 foodName\n" +
+                "14 2 6 advName advName1\n" +
+                "6666/66-advName-botName\n" +
+                "6666/66-advName@advName1-equName\n" +
+                "6666/66-advName@#-equName\n" +
+                "6666/66-advName@#-equName2\n" +
+                "6666/66-advName@#-equName22\n" +
+                "6666/66-advName@#-equName\n" +
+                "15 6666/66\n" +
+                "16 123\n" +
+                "17 123\n" +
+                "18 123 1234\n" +
+                "19 123\n" +
+                "20 123\n" +
+                "21 123 111\n" +
+                "21 123 222\n" +
+                "21 123 3333\n" +
+                "22 123\n" +
+                "23 123 111111 botName RegularBottle\n" +
+                "23 123 111111 botName RecoverBottle 100\n" +
+                "23 123 111111 botName ReinforcedBottle 0.5\n" +
+                "23 123 222222 equName RegularEquipment\n" +
+                "23 123 222222 equName CritEquipment 100\n" +
+                "23 123 222222 equName EpicEquipment 0.5\n" +
+                "23 123 333333 foodName Food\n";
         ByteArrayInputStream in = new ByteArrayInputStream(args.getBytes());
         System.setIn(in);
 
-        Main.main(new String[] {});
+        Main.main(new String[]{});
     }
 
     @Test

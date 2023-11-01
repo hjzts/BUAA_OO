@@ -17,8 +17,8 @@ public class Manager {
 
     private static FightMode fightMode = new FightMode();
     private static boolean printTestFlag = false;
-
     private static ArrayList<String> strings;
+    private static final Shop shop = Shop.getShopInstance();
 
     public static void operation(int n, ArrayList<ArrayList<String>> inputInfo) {
         for (int i = 0; i < n; ++i) {
@@ -274,12 +274,6 @@ public class Manager {
         int equipmentId = Integer.parseInt(strings.get(2));
 
         adventurersMap.get(adventurerId).carryEquipment(equipmentId);
-    }
-
-    public static void equipmentUse(int beAttackedId, int hitPointDecrease) {
-        adventurersMap.get(beAttackedId).decreaseHitPoint(hitPointDecrease);
-        int hitPoint = adventurersMap.get(beAttackedId).getHitPoint();
-        System.out.println(beAttackedId + " " + hitPoint);
     }
 
     public static void bottleCarry(ArrayList<String> strings) {

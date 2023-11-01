@@ -30,10 +30,6 @@ public class Food implements Commodity {
         return energy;
     }
 
-    public int getCommodityNum() {
-        return 1;
-    }
-
     public long getCommodityValue() {
         return price;
     }
