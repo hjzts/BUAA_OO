@@ -132,27 +132,6 @@ public class Backpack {
         }
     }
 
-    public int getBottleCapacity(String bottleName) {
-        int capacity = 0;
-        int bottleId = 0;
-        boolean flag = false;
-        for (Integer key : bottleTreeMap.keySet()) {
-            if (bottleTreeMap.get(key).getName().equals(bottleName)) {
-                if (!flag) {
-                    capacity = bottleTreeMap.get(key).getCapacity();
-                    bottleId = key;
-                    flag = true;
-                } else if (bottleId > key) {
-                    capacity = bottleTreeMap.get(key).getCapacity();
-                    bottleId = key;
-                } else {
-                    continue;
-                }
-            }
-        }
-        return capacity;
-    }
-
     public int getBottleHitPoint(Bottle bottle, int hitPoint) {
         if (bottle.getIsEmpty()) {
             return 0;

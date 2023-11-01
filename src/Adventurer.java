@@ -188,10 +188,6 @@ public class Adventurer implements Commodity {
         return backpack.hasBottle(bottleName);
     }
 
-    public boolean hasBottle(String bottleName) {
-        return bottlesMap.containsValue(bottleName);
-    }
-
     public int getBottleId(String bottleName) {
         return backpack.getBottleId(bottleName);
     }
@@ -204,10 +200,6 @@ public class Adventurer implements Commodity {
             return 0;
         }
         return backpack.getBottleHitPoint(bottle, hitPoint);
-    }
-
-    public boolean hasFood(String foodName) {
-        return foodMap.containsValue(foodName);
     }
 
     public int getFoodId(String foodName) {

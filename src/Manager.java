@@ -364,7 +364,7 @@ public class Manager {
                 System.out.println("有脏东西");
             }
         }
-        fightMode.adventurerHiringHelp();
+//        fightMode.adventurerHiringHelp();
         fightMode.exitFightMode();
     }
 
