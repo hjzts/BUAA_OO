@@ -154,25 +154,25 @@ public class Backpack {
     }
 
     public int getBottleHitPoint(Bottle bottle, int hitPoint) {
+        if (bottle.getIsEmpty()) {
+            return 0;
+        }
         int capacity = bottle.getCapacity();
         int bottleHitPoint = 0;
-        if (bottle instanceof RecoverBottle) {
-            double ratio = bottle.getRatio();
-            bottleHitPoint = (int) (ratio * hitPoint);
-            return bottleHitPoint;
-        } else if (bottle instanceof RegularBottle) {
+        if (bottle instanceof RegularBottle) {
             bottleHitPoint = capacity;
         } else if (bottle instanceof ReinforcedBottle) {
             double ratio = bottle.getRatio();
             bottleHitPoint = (int) (capacity * (1 + ratio));
+        } else if (bottle instanceof RecoverBottle) {
+            double ratio = bottle.getRatio();
+            bottleHitPoint = (int) (ratio * hitPoint);
         }
-        if (bottle.getIsEmpty()) {
-            return 0;
-        }
+        bottle.setIsEmpty(true);
         return bottleHitPoint;
     }
 
-    public Bottle useBottle(String bottleName, int hitPoint) {
+    public Bottle useBottle(String bottleName) {
         int bottleId = 0;
         boolean isEmpty = false;
         boolean flag = false;
@@ -194,7 +194,6 @@ public class Backpack {
             return null;
         } else {
             Bottle bottle = bottleTreeMap.get(bottleId);
-            bottle.setIsEmpty(true);
             //bottleTreeMap.get(bottleId).resetCapacity();
             return bottle;
         }

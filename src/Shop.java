@@ -47,8 +47,6 @@ public class Shop {
             return null;
         }
         long capacity = bottleCapacitySum / bottleSellNum;
-        bottlePriceSum += price;
-        bottleSellNum++;
         int bottleId = Integer.parseInt(strings.get(2));
         String bottleName = strings.get(3);
         if (strings.get(4).equals("RegularBottle")) {
@@ -73,8 +71,6 @@ public class Shop {
             return null;
         }
         long star = equipmentStarSum / equipmentSellNum;
-        equipmentPriceSum += price;
-        equipmentSellNum++;
         int equipmentId = Integer.parseInt(strings.get(2));
         String equipmentName = strings.get(3);
         if (strings.get(4).equals("RegularEquipment")) {
@@ -99,8 +95,6 @@ public class Shop {
             return null;
         }
         long energy = foodEnergySum / foodSellNum;
-        foodPriceSum += price;
-        foodSellNum++;
         int foodId = Integer.parseInt(strings.get(2));
         String foodName = strings.get(3);
         return new Food(foodId, foodName, (int) energy, price);

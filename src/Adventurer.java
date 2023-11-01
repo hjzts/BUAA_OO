@@ -198,8 +198,8 @@ public class Adventurer implements Commodity {
 
     public int useBottle(String bottleName) {
         int bottleId = getBottleId(bottleName);
-        Bottle bottle = backpack.useBottle(bottleName, hitPoint);
-        if (bottle == null || bottle.getIsEmpty()) {
+        Bottle bottle = backpack.useBottle(bottleName);
+        if (bottle == null) {
             bottlesMap.remove(bottleId);
             return 0;
         }
